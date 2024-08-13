@@ -50,7 +50,7 @@
 									"urlencoded": [
 										{
 											"key": "login_hint",
-											"value": "phone_number:{{enduser-phone-number}}",
+											"value": "{{identifier-type}}:{{enduser-identifier}}",
 											"description": "Format = identifier_type:identifier (refers to end user)",
 											"type": "text"
 										},
@@ -84,7 +84,7 @@
 											"urlencoded": [
 												{
 													"key": "login_hint",
-													"value": "phone_number:{{enduser-phone-number}}",
+													"value": "phone_number:{{enduser-identifier}}",
 													"description": "Format = identifier_type:identifier (refers to end user)",
 													"type": "text"
 												},
@@ -235,7 +235,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{auth-gateway-url}}/authorize?client_id={{application-client-id}}&response_type=code&purpose={{api-product-purpose}}&redirect_uri={{application-backend-callback-url}}&state={{enduser-phone-number}}",
+									"raw": "{{auth-gateway-url}}/authorize?client_id={{application-client-id}}&response_type=code&purpose={{api-product-purpose}}&redirect_uri={{application-backend-callback-url}}&state={{enduser-identifier}}",
 									"host": [
 										"{{auth-gateway-url}}"
 									],
@@ -265,7 +265,7 @@
 										},
 										{
 											"key": "state",
-											"value": "{{enduser-phone-number}}",
+											"value": "{{enduser-identifier}}",
 											"description": "Anything you need to share between your app components related to your session or transaction. You will want to pass the end-user's phone number if you need it at backend to perform a request to the service API"
 										},
 										{
@@ -376,7 +376,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"phoneNumber\": \"{{enduser-phone-number}}\",\n    \"maxAge\": 2400\n}",
+									"raw": "{\n    \"phoneNumber\": \"{{enduser-identifier}}\",\n    \"maxAge\": 2400\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -415,7 +415,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"phoneNumber\": \"{{enduser-phone-number}}\"\n}",
+									"raw": "{\n    \"phoneNumber\": \"{{enduser-identifier}}\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -459,7 +459,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"phoneNumber\": \"{{enduser-phone-number}}\"\n}",
+									"raw": "{\n    \"phoneNumber\": \"{{enduser-identifier}}\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -516,7 +516,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"duration\": 3600,\n    \"ueId\": {\n        \"msisdn\": \"{{enduser-phone-number}}\"\n    },\n    \"asId\": {\n        \"ipv4addr\": \"0.0.0.0/0\"\n    },\n    \"qos\": \"QOS_E\"\n}",
+									"raw": "{\n    \"duration\": 3600,\n    \"ueId\": {\n        \"msisdn\": \"{{enduser-identifier}}\"\n    },\n    \"asId\": {\n        \"ipv4addr\": \"0.0.0.0/0\"\n    },\n    \"qos\": \"QOS_E\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -544,7 +544,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"duration\": 3600,\n    \"ueId\": {\n        \"msisdn\": \"{{enduser-phone-number}}\"\n    },\n    \"asId\": {\n        \"ipv4addr\": \"0.0.0.0/0\"\n    },\n    \"qos\": \"QOS_E\"\n}",
+											"raw": "{\n    \"duration\": 3600,\n    \"ueId\": {\n        \"msisdn\": \"{{enduser-identifier}}\"\n    },\n    \"asId\": {\n        \"ipv4addr\": \"0.0.0.0/0\"\n    },\n    \"qos\": \"QOS_E\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -812,7 +812,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ueId\": {\n    \"msisdn\": \"{{enduser-phone-number}}\"\n  },\n  \"latitude\": 50.735851,\n  \"longitude\": 7.10066,\n  \"accuracy\": 10\n}",
+									"raw": "{\n  \"ueId\": {\n    \"msisdn\": \"{{enduser-identifier}}\"\n  },\n  \"latitude\": 50.735851,\n  \"longitude\": 7.10066,\n  \"accuracy\": 10\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -856,7 +856,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ueId\": {\n    \"msisdn\": \"{{enduser-phone-number}}\"\n  },\n  \"latitude\": 50.735851,\n  \"longitude\": 7.10066,\n  \"accuracy\": 10\n}",
+									"raw": "{\n  \"ueId\": {\n    \"msisdn\": \"{{enduser-identifier}}\"\n  },\n  \"latitude\": 50.735851,\n  \"longitude\": 7.10066,\n  \"accuracy\": 10\n}",
 									"options": {
 										"raw": {
 											"language": "json"
