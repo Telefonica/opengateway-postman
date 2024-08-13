@@ -1,0 +1,886 @@
+{
+	"info": {
+		"_postman_id": "d4aac8e8-e58c-4a14-8be9-2ac34cd05b9a",
+		"name": "Open Gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13571917"
+	},
+	"item": [
+		{
+			"name": "Authorization (OIDC)",
+			"item": [
+				{
+					"name": "CIBA (Backend)",
+					"item": [
+						{
+							"name": "1st Authorization request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(pm.response.text());",
+											"pm.environment.set(\"auth_req_id\", jsonData.auth_req_id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{application-client-secret}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{application-client-id}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "login_hint",
+											"value": "phone_number:{{enduser-phone-number}}",
+											"description": "Format = identifier_type:identifier (refers to end user)",
+											"type": "text"
+										},
+										{
+											"key": "purpose",
+											"value": "{{api-product-purpose}}",
+											"description": "Format = dpv:w3c-purpose#api-scope",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api-gateway-url}}/bc-authorize",
+									"host": [
+										"{{api-gateway-url}}"
+									],
+									"path": [
+										"bc-authorize"
+									]
+								},
+								"description": "This is the 1st request of the CIBA flow. Check CAMARA documentation at [https://github.com/camaraproject/IdentityAndConsentManagement/blob/release-0.1.0/documentation/CAMARA-API-access-and-user-consent.md#ciba-flow-backend-flow](https://github.com/camaraproject/IdentityAndConsentManagement/blob/release-0.1.0/documentation/CAMARA-API-access-and-user-consent.md#ciba-flow-backend-flow)\n\nCheck the proper purpose to use for each API in the request documentation at the Service APIs folder.\n\nE.g. for SIM Swap `dpv:FraudPreventionAndDetection#sim-swap`"
+							},
+							"response": [
+								{
+									"name": "Response example",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "login_hint",
+													"value": "phone_number:{{enduser-phone-number}}",
+													"description": "Format = identifier_type:identifier (refers to end user)",
+													"type": "text"
+												},
+												{
+													"key": "purpose",
+													"value": "{{api-product-purpose}}",
+													"description": "Format = dpv:w3c-purpose#api-scope",
+													"type": "text"
+												},
+												{
+													"key": "acr_values",
+													"value": "2",
+													"type": "text",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "{{api-gateway-url}}/bc-authorize",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"bc-authorize"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Tue, 21 May 2024 08:25:40 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "89"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "X-Correlator",
+											"value": "70bfd722-cf71-4668-8fa7-cfc316946a38"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800; includeSubDomains"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"auth_req_id\": \"xDjNuuTLTNeU-zbhQJ_qgw\",\n    \"expires_in\": 300,\n    \"interval\": 2\n}"
+								}
+							]
+						},
+						{
+							"name": "2nd Get access token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(pm.response.text());",
+											"pm.environment.set(\"access_token\", jsonData.access_token);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{application-client-secret}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{application-client-id}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "urn:openid:params:grant-type:ciba",
+											"description": "Fixed value for this authentication method",
+											"type": "text"
+										},
+										{
+											"key": "auth_req_id",
+											"value": "{{auth_req_id}}",
+											"description": "As obtained from /bc-authorize",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api-gateway-url}}/token",
+									"host": [
+										"{{api-gateway-url}}"
+									],
+									"path": [
+										"token"
+									]
+								},
+								"description": "This is the 2nd request of the CIBA flow. Check CAMARA documentation at [https://github.com/camaraproject/IdentityAndConsentManagement/blob/release-0.1.0/documentation/CAMARA-API-access-and-user-consent.md#ciba-flow-backend-flow](https://github.com/camaraproject/IdentityAndConsentManagement/blob/release-0.1.0/documentation/CAMARA-API-access-and-user-consent.md#ciba-flow-backend-flow)\n\nIn case the purpose used in the 1st step needed end-user consent, it should be captured in an out-of-band flow."
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Auth code (Frontend)",
+					"item": [
+						{
+							"name": "1st Authorization request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{auth-gateway-url}}/authorize?client_id={{application-client-id}}&response_type=code&purpose={{api-product-purpose}}&redirect_uri={{application-backend-callback-url}}&state={{enduser-phone-number}}",
+									"host": [
+										"{{auth-gateway-url}}"
+									],
+									"path": [
+										"authorize"
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "{{application-client-id}}",
+											"description": "Your app's"
+										},
+										{
+											"key": "response_type",
+											"value": "code",
+											"description": "Fixed value for this authentication method"
+										},
+										{
+											"key": "purpose",
+											"value": "{{api-product-purpose}}",
+											"description": "According to the product's purpose and scope. Check Service API request's documentation"
+										},
+										{
+											"key": "redirect_uri",
+											"value": "{{application-backend-callback-url}}",
+											"description": "You will take de authorization code at this endpoint from the code parameter in the query string"
+										},
+										{
+											"key": "state",
+											"value": "{{enduser-phone-number}}",
+											"description": "Anything you need to share between your app components related to your session or transaction. You will want to pass the end-user's phone number if you need it at backend to perform a request to the service API"
+										},
+										{
+											"key": "nonce",
+											"value": "request_nonce",
+											"description": "In order to identify each request",
+											"disabled": true
+										}
+									]
+								},
+								"description": "This is the 1st request of the Auth Code flow. Check CAMARA documentation at [https://github.com/camaraproject/IdentityAndConsentManagement/blob/release-0.1.0/documentation/CAMARA-API-access-and-user-consent.md#authorization-code-flow-frontend-flow](https://github.com/camaraproject/IdentityAndConsentManagement/blob/release-0.1.0/documentation/CAMARA-API-access-and-user-consent.md#authorization-code-flow-frontend-flow)\n\nCheck the proper purpose to use for each API in the request documentation at the Service APIs folder.\n\nE.g. for SIM Swap `dpv:FraudPreventionAndDetection#sim-swap`\n\nThis request must be performed from the end-user's device since this authentication method consists of its IP address resolution to identify them.\n\nYou will need to publish an HTTP server to listen for the `redirect_uri` where the code will be redirected to."
+							},
+							"response": []
+						},
+						{
+							"name": "2nd Get access token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(pm.response.text());",
+											"pm.environment.set(\"access_token\", jsonData.access_token);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{application-client-secret}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{application-client-id}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "authorization_code",
+											"description": "Fixed value for this authentication method",
+											"type": "text"
+										},
+										{
+											"key": "code",
+											"value": "",
+											"description": "The one obtained at the redirect_uri provided to /auithorize",
+											"type": "text"
+										},
+										{
+											"key": "redirect_uri",
+											"value": "{{application-backend-callback-url}}",
+											"description": "You will take de authorization code at this endpoint from the code parameter in the query string",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{auth-gateway-url}}/token",
+									"host": [
+										"{{auth-gateway-url}}"
+									],
+									"path": [
+										"token"
+									]
+								},
+								"description": "This is the 2nd request of the Auth Code flow. Check CAMARA documentation at [https://github.com/camaraproject/IdentityAndConsentManagement/blob/release-0.1.0/documentation/CAMARA-API-access-and-user-consent.md#authorization-code-flow-frontend-flow](https://github.com/camaraproject/IdentityAndConsentManagement/blob/release-0.1.0/documentation/CAMARA-API-access-and-user-consent.md#authorization-code-flow-frontend-flow)\n\nThis request is supposed to be performed from your backend, from where you publish your `redirect_uri` listening for the code requested in the 1st step.\n\nIn case the purpose used in the 1st step needed end-user consent, it will redirect such first request to the proper consent capture web page previous to the redirect to your redirect_uri."
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Service APIs",
+			"item": [
+				{
+					"name": "SIM Swap",
+					"item": [
+						{
+							"name": "SIM Swap check",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"phoneNumber\": \"{{enduser-phone-number}}\",\n    \"maxAge\": 2400\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-gateway-url}}/sim-swap/v0/check",
+									"host": [
+										"{{api-gateway-url}}"
+									],
+									"path": [
+										"sim-swap",
+										"v0",
+										"check"
+									]
+								},
+								"description": "Check the API reference at [https://github.com/camaraproject/SimSwap/blob/main/code/API_definitions/sim_swap.yaml](https://github.com/camaraproject/SimSwap/blob/main/code/API_definitions/sim_swap.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#sim-swap`"
+							},
+							"response": []
+						},
+						{
+							"name": "SIM Swap retrieve date",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"phoneNumber\": \"{{enduser-phone-number}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-gateway-url}}/sim-swap/v0/retrieve-date",
+									"host": [
+										"{{api-gateway-url}}"
+									],
+									"path": [
+										"sim-swap",
+										"v0",
+										"retrieve-date"
+									]
+								},
+								"description": "Check the API reference at [https://github.com/camaraproject/SimSwap/blob/main/code/API_definitions/sim_swap.yaml](https://github.com/camaraproject/SimSwap/blob/main/code/API_definitions/sim_swap.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#sim-swap`"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Number Verification",
+					"item": [
+						{
+							"name": "Number Verification verify",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"phoneNumber\": \"{{enduser-phone-number}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-gateway-url}}/number-verification/v0/verify",
+									"host": [
+										"{{api-gateway-url}}"
+									],
+									"path": [
+										"number-verification",
+										"v0",
+										"verify"
+									]
+								},
+								"description": "Check the API reference at [https://github.com/camaraproject/NumberVerification/blob/main/code/API_definitions/number_verification.yaml](https://github.com/camaraproject/NumberVerification/blob/main/code/API_definitions/number_verification.yaml)\n\nUse frontend Auth Code flow in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#number-verification-verify-read`"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Mobile QoD",
+					"item": [
+						{
+							"name": "QoD session v0.8",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(pm.response.text());",
+											"pm.environment.set(\"qod_session_id\", jsonData.id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"duration\": 3600,\n    \"ueId\": {\n        \"msisdn\": \"{{enduser-phone-number}}\"\n    },\n    \"asId\": {\n        \"ipv4addr\": \"0.0.0.0/0\"\n    },\n    \"qos\": \"QOS_E\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-gateway-url}}/qod/v0/sessions",
+									"host": [
+										"{{api-gateway-url}}"
+									],
+									"path": [
+										"qod",
+										"v0",
+										"sessions"
+									]
+								},
+								"description": "Check the API reference at [https://github.com/camaraproject/QualityOnDemand/blob/release-0.8.1/code/API_definitions/qod-api.yaml](https://github.com/camaraproject/QualityOnDemand/blob/release-0.8.1/code/API_definitions/qod-api.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:RequestedServiceProvision#qod`"
+							},
+							"response": [
+								{
+									"name": "Response example",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"duration\": 3600,\n    \"ueId\": {\n        \"msisdn\": \"{{enduser-phone-number}}\"\n    },\n    \"asId\": {\n        \"ipv4addr\": \"0.0.0.0/0\"\n    },\n    \"qos\": \"QOS_E\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{api-gateway-url}}/qod/v0/sessions",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"qod",
+												"v0",
+												"sessions"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Tue, 13 Aug 2024 13:49:52 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "186"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Content-Security-Policy",
+											"value": "default-src https:"
+										},
+										{
+											"key": "Ratelimit-Limit",
+											"value": "36000"
+										},
+										{
+											"key": "Ratelimit-Remaining",
+											"value": "35999"
+										},
+										{
+											"key": "Ratelimit-Reset",
+											"value": "8"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "no-referrer"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=315360000; includeSubDomains; preload"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "X-Correlator",
+											"value": "018b1b47-7a35-cc90-b6ee-951ba0637d9e"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "SAMEORIGIN"
+										},
+										{
+											"key": "X-Ratelimit-Limit-Minute",
+											"value": "36000"
+										},
+										{
+											"key": "X-Ratelimit-Remaining-Minute",
+											"value": "35999"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"duration\": 3600,\n    \"ueId\": {\n        \"msisdn\": \"+34600666006\"\n    },\n    \"asId\": {\n        \"ipv4addr\": \"0.0.0.0/0\"\n    },\n    \"qos\": \"QOS_E\",\n    \"id\": \"6f3e1691-cb74-4044-95aa-a95456409b23\",\n    \"startedAt\": 1723556992,\n    \"expiresAt\": 1723560592\n}"
+								}
+							]
+						},
+						{
+							"name": "QoD session v0.8",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api-gateway-url}}/qod/v0/sessions/:id",
+									"host": [
+										"{{api-gateway-url}}"
+									],
+									"path": [
+										"qod",
+										"v0",
+										"sessions",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{qod_session_id}}"
+										}
+									]
+								},
+								"description": "Check the API reference at [https://github.com/camaraproject/QualityOnDemand/blob/release-0.8.1/code/API_definitions/qod-api.yaml](https://github.com/camaraproject/QualityOnDemand/blob/release-0.8.1/code/API_definitions/qod-api.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:RequestedServiceProvision#qod`"
+							},
+							"response": []
+						},
+						{
+							"name": "QoD session v0.8",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-gateway-url}}/qod/v0/sessions/:id",
+									"host": [
+										"{{api-gateway-url}}"
+									],
+									"path": [
+										"qod",
+										"v0",
+										"sessions",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "{{qod_session_id}}"
+										}
+									]
+								},
+								"description": "Check the API reference at [https://github.com/camaraproject/QualityOnDemand/blob/release-0.8.1/code/API_definitions/qod-api.yaml](https://github.com/camaraproject/QualityOnDemand/blob/release-0.8.1/code/API_definitions/qod-api.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:RequestedServiceProvision#qod`"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Home Devices QoD",
+					"item": [
+						{
+							"name": "Home Devices QoD v0.3",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"serviceClass\": \"real_time_interactive\",\n  \"ipAddress\": \"{{device-local-ip}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-gateway-url}}/home-devices-qod/v0/qos",
+									"host": [
+										"{{api-gateway-url}}"
+									],
+									"path": [
+										"home-devices-qod",
+										"v0",
+										"qos"
+									]
+								},
+								"description": "Check the API reference at [https://github.com/camaraproject/HomeDevicesQoD/blob/release-0.3.0/code/API_definitions/home_devices_qod.yaml](https://github.com/camaraproject/HomeDevicesQoD/blob/release-0.3.0/code/API_definitions/home_devices_qod.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:RequestedServiceProvision#home-devices-qod`"
+							},
+							"response": []
+						},
+						{
+							"name": "Home Devices QoD v0.1",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"dscp\": \"CS4\",\n  \"ip_address\": \"{{device-local-ip}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-gateway-url}}/home-devices-qod-rc/v1/dscp",
+									"host": [
+										"{{api-gateway-url}}"
+									],
+									"path": [
+										"home-devices-qod-rc",
+										"v1",
+										"dscp"
+									]
+								},
+								"description": "Check the API reference at [https://github.com/camaraproject/HomeDevicesQoD/blob/release-0.1.0/code/API_definitions/home_devices_qod.yaml](https://github.com/camaraproject/HomeDevicesQoD/blob/release-0.1.0/code/API_definitions/home_devices_qod.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:RequestedServiceProvision#home-devices-qod`"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Device Location",
+					"item": [
+						{
+							"name": "Device Location verify v0.1",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"ueId\": {\n    \"msisdn\": \"{{enduser-phone-number}}\"\n  },\n  \"latitude\": 50.735851,\n  \"longitude\": 7.10066,\n  \"accuracy\": 10\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-gateway-url}}/location/v0/verify",
+									"host": [
+										"{{api-gateway-url}}"
+									],
+									"path": [
+										"location",
+										"v0",
+										"verify"
+									]
+								},
+								"description": "Check the API reference at [https://github.com/camaraproject/DeviceLocation/blob/release-v0.1.0/code/API_definitions/location.yaml](https://github.com/camaraproject/DeviceLocation/blob/release-v0.1.0/code/API_definitions/location.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#location-verification-verify`"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Device Status",
+					"item": [
+						{
+							"name": "Device Status Roaming v0.4.1",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"ueId\": {\n    \"msisdn\": \"{{enduser-phone-number}}\"\n  },\n  \"latitude\": 50.735851,\n  \"longitude\": 7.10066,\n  \"accuracy\": 10\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-gateway-url}}/device-status/v0/roaming",
+									"host": [
+										"{{api-gateway-url}}"
+									],
+									"path": [
+										"device-status",
+										"v0",
+										"roaming"
+									]
+								},
+								"description": "Check the API reference at [https://github.com/camaraproject/DeviceStatus/blob/release-0.4.1/code/API_definitions/device-status.yaml](https://github.com/camaraproject/DeviceStatus/blob/release-0.4.1/code/API_definitions/device-status.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-status-roaming-read`"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
