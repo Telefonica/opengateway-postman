@@ -879,6 +879,89 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "KYC",
+					"item": [
+						{
+							"name": "KYC match v0.1",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"birthdate\": \"1974-06-10\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-gateway-url}}/kyc-match/v0/match",
+									"host": [
+										"{{api-gateway-url}}"
+									],
+									"path": [
+										"kyc-match",
+										"v0",
+										"match"
+									]
+								},
+								"description": "Check the API reference at [https://github.com/camaraproject/SimSwap/blob/main/code/API_definitions/sim_swap.yaml](https://github.com/camaraproject/SimSwap/blob/main/code/API_definitions/sim_swap.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#sim-swap`"
+							},
+							"response": []
+						},
+						{
+							"name": "KYC match v1.0 RC",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"phoneNumber\": \"{{enduser-identifier}}\",\n    \"idDocument\": \"09006671D\",\n    \"birthdate\": \"1974-06-10\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-gateway-url}}/kyc-rc/v1/match",
+									"host": [
+										"{{api-gateway-url}}"
+									],
+									"path": [
+										"kyc-rc",
+										"v1",
+										"match"
+									]
+								},
+								"description": "Check the API reference at [https://github.com/camaraproject/SimSwap/blob/main/code/API_definitions/sim_swap.yaml](https://github.com/camaraproject/SimSwap/blob/main/code/API_definitions/sim_swap.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#sim-swap`"
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}
