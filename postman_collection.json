@@ -747,7 +747,7 @@
 										"qos"
 									]
 								},
-								"description": "Check the API reference at [https://github.com/camaraproject/HomeDevicesQoD/blob/release-0.3.0/code/API_definitions/home_devices_qod.yaml](https://github.com/camaraproject/HomeDevicesQoD/blob/release-0.3.0/code/API_definitions/home_devices_qod.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:RequestedServiceProvision#home-devices-qod`"
+								"description": "Check the API reference at [https://github.com/camaraproject/HomeDevicesQoD/blob/release-0.1.0/code/API_definitions/home_devices_qod.yaml](https://github.com/camaraproject/HomeDevicesQoD/blob/release-0.1.0/code/API_definitions/home_devices_qod.yaml)\n\nUse the CIBA flow in the Authorization folder to get an access_token, with the following purpose and login hint:\n\n- purpose: `dpv:RequestedServiceProvision#home-devices-qod`\n    \n- identifier type: `ipport`\n    \n- end user identifier: home router public IP address (e.g. `95.127.194.38`)"
 							},
 							"response": []
 						},
@@ -786,7 +786,7 @@
 										"dscp"
 									]
 								},
-								"description": "Check the API reference at [https://github.com/camaraproject/HomeDevicesQoD/blob/release-0.1.0/code/API_definitions/home_devices_qod.yaml](https://github.com/camaraproject/HomeDevicesQoD/blob/release-0.1.0/code/API_definitions/home_devices_qod.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:RequestedServiceProvision#home-devices-qod`"
+								"description": "Check the API reference at [https://github.com/camaraproject/HomeDevicesQoD/blob/release-0.1.0/code/API_definitions/home_devices_qod.yaml](https://github.com/camaraproject/HomeDevicesQoD/blob/release-0.1.0/code/API_definitions/home_devices_qod.yaml)\n\nUse the CIBA flow in the Authorization folder to get an access_token, with the following purpose and login hint:\n\n- purpose: `dpv:RequestedServiceProvision#home-devices-qod`\n    \n- identifier type: `ipport`\n    \n- end user identifier: home router public IP address (e.g. `95.127.194.38`)"
 							},
 							"response": []
 						}
