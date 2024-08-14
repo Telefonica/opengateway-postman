@@ -856,7 +856,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"ueId\": {\n    \"msisdn\": \"{{enduser-identifier}}\"\n  },\n  \"latitude\": 50.735851,\n  \"longitude\": 7.10066,\n  \"accuracy\": 10\n}",
+									"raw": "{\n  \"ueId\": {\n    \"msisdn\": \"{{enduser-identifier}}\"\n  }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
