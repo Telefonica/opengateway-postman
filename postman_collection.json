@@ -63,9 +63,9 @@
 									]
 								},
 								"url": {
-									"raw": "{{api-gateway-url}}/bc-authorize",
+									"raw": "{{auth-gateway-url}}/bc-authorize",
 									"host": [
-										"{{api-gateway-url}}"
+										"{{auth-gateway-url}}"
 									],
 									"path": [
 										"bc-authorize"
@@ -197,9 +197,9 @@
 									]
 								},
 								"url": {
-									"raw": "{{api-gateway-url}}/token",
+									"raw": "{{auth-gateway-url}}/token",
 									"host": [
-										"{{api-gateway-url}}"
+										"{{auth-gateway-url}}"
 									],
 									"path": [
 										"token"
