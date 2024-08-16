@@ -921,45 +921,6 @@
 								"description": "Check the API reference at [https://github.com/camaraproject/KnowYourCustomer/blob/release-v0.1.1/code/API_definitions/kyc-match.yaml](https://github.com/camaraproject/KnowYourCustomer/blob/release-v0.1.1/code/API_definitions/kyc-match.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#kyc-match`"
 							},
 							"response": []
-						},
-						{
-							"name": "KYC match v1.0 RC",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"phoneNumber\": \"{{enduser-identifier}}\",\n    \"idDocument\": \"09006671D\",\n    \"birthdate\": \"1974-06-10\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{api-gateway-url}}/kyc-rc/v1/match",
-									"host": [
-										"{{api-gateway-url}}"
-									],
-									"path": [
-										"kyc-rc",
-										"v1",
-										"match"
-									]
-								},
-								"description": "Check the API reference at [https://developers.baikalplatform.com/apis/kyc-rc/es-pro/v1/](https://developers.baikalplatform.com/apis/kyc-rc/es-pro/v1/)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#kyc-match`"
-							},
-							"response": []
 						}
 					]
 				}
