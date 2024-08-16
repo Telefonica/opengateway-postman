@@ -276,7 +276,7 @@
 										}
 									]
 								},
-								"description": "This is the 1st request of the Auth Code flow. Check CAMARA documentation at [https://github.com/camaraproject/IdentityAndConsentManagement/blob/release-0.1.0/documentation/CAMARA-API-access-and-user-consent.md#authorization-code-flow-frontend-flow](https://github.com/camaraproject/IdentityAndConsentManagement/blob/release-0.1.0/documentation/CAMARA-API-access-and-user-consent.md#authorization-code-flow-frontend-flow)\n\nCheck the proper purpose to use for each API in the request documentation at the Service APIs folder.\n\nE.g. for SIM Swap `dpv:FraudPreventionAndDetection#sim-swap`\n\nThis request must be performed from the end-user's device since this authentication method consists of its IP address resolution to identify them.\n\nYou will need to publish an HTTP server to listen for the `redirect_uri` where the code will be redirected to."
+								"description": "This is the 1st request of the Auth Code flow. Check CAMARA documentation at [https://github.com/camaraproject/IdentityAndConsentManagement/blob/release-0.1.0/documentation/CAMARA-API-access-and-user-consent.md#authorization-code-flow-frontend-flow](https://github.com/camaraproject/IdentityAndConsentManagement/blob/release-0.1.0/documentation/CAMARA-API-access-and-user-consent.md#authorization-code-flow-frontend-flow)\n\nCheck the proper purpose to use for each API in the request documentation at the Service APIs folder.\n\nE.g. for SIM Swap `dpv:FraudPreventionAndDetection#sim-swap`\n\nThis request must be performed from the end-user's device since this authentication method consists of its IP address resolution to identify them. It has been included in this collection as a reference. Sending it from Postman just won't work, since the client must follow redirections until reaching the `redirect_uri`. In order to test it, copy the URL resolved with your values (you can find it in this very Documentation tab) and paste it in your browser running on the end-user's device.\n\nYou will need to publish an HTTP server to listen for the `redirect_uri` where the code will be redirected to."
 							},
 							"response": []
 						},
@@ -477,7 +477,7 @@
 										"verify"
 									]
 								},
-								"description": "Check the API reference at [https://github.com/camaraproject/NumberVerification/blob/main/code/API_definitions/number_verification.yaml](https://github.com/camaraproject/NumberVerification/blob/main/code/API_definitions/number_verification.yaml)\n\nUse frontend Auth Code flow in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#number-verification-verify-read`"
+								"description": "Check the API reference at [https://github.com/camaraproject/NumberVerification/blob/main/code/API_definitions/number_verification.yaml](https://github.com/camaraproject/NumberVerification/blob/main/code/API_definitions/number_verification.yaml)\n\nUse the frontend Auth Code flow in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#number-verification-verify-read`"
 							},
 							"response": []
 						}
@@ -747,7 +747,7 @@
 										"qos"
 									]
 								},
-								"description": "Check the API reference at [https://github.com/camaraproject/HomeDevicesQoD/blob/release-0.1.0/code/API_definitions/home_devices_qod.yaml](https://github.com/camaraproject/HomeDevicesQoD/blob/release-0.1.0/code/API_definitions/home_devices_qod.yaml)\n\nUse the CIBA flow in the Authorization folder to get an access_token, with the following purpose and login hint:\n\n- purpose: `dpv:RequestedServiceProvision#home-devices-qod`\n    \n- identifier type: `ipport`\n    \n- end user identifier: home router public IP address (e.g. `95.127.194.38`)"
+								"description": "Check the API reference at [https://github.com/camaraproject/HomeDevicesQoD/blob/release-0.3.0/code/API_definitions/home_devices_qod.yaml](https://github.com/camaraproject/HomeDevicesQoD/blob/release-0.3.0/code/API_definitions/home_devices_qod.yaml)\n\nUse the CIBA flow in the Authorization folder to get an access_token, with the following purpose and login hint:\n\n- purpose: `dpv:RequestedServiceProvision#home-devices-qod`\n    \n- identifier type: `ipport`\n    \n- end user identifier: home router public IP address (e.g. `95.127.194.38`)"
 							},
 							"response": []
 						},
@@ -918,7 +918,7 @@
 										"match"
 									]
 								},
-								"description": "Check the API reference at [https://github.com/camaraproject/SimSwap/blob/main/code/API_definitions/sim_swap.yaml](https://github.com/camaraproject/SimSwap/blob/main/code/API_definitions/sim_swap.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#sim-swap`"
+								"description": "Check the API reference at [https://github.com/camaraproject/KnowYourCustomer/blob/release-v0.1.1/code/API_definitions/kyc-match.yaml](https://github.com/camaraproject/KnowYourCustomer/blob/release-v0.1.1/code/API_definitions/kyc-match.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#kyc-match`"
 							},
 							"response": []
 						},
@@ -957,7 +957,7 @@
 										"match"
 									]
 								},
-								"description": "Check the API reference at [https://github.com/camaraproject/SimSwap/blob/main/code/API_definitions/sim_swap.yaml](https://github.com/camaraproject/SimSwap/blob/main/code/API_definitions/sim_swap.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#sim-swap`"
+								"description": "Check the API reference at [https://developers.baikalplatform.com/apis/kyc-rc/es-pro/v1/](https://developers.baikalplatform.com/apis/kyc-rc/es-pro/v1/)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#kyc-match`"
 							},
 							"response": []
 						}
