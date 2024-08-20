@@ -21,7 +21,8 @@ This repository contains, for your convenience when testing the Open Gateway API
 
 ## How to import these files into Postman
 
-See https://learning.postman.com/docs/getting-started/importing-and-exporting/importing-data/
+1. Download the files with .json extension from this repository to your computer
+2. See https://learning.postman.com/docs/getting-started/importing-and-exporting/importing-data/
 
 ## How to use the Postman collection requests
 
