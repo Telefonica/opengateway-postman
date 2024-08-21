@@ -34,7 +34,7 @@
 										{
 											"key": "password",
 											"value": "{{application-client-secret}}",
-											"type": "string"
+											"type": "secret"
 										},
 										{
 											"key": "username",
@@ -168,7 +168,7 @@
 										{
 											"key": "password",
 											"value": "{{application-client-secret}}",
-											"type": "string"
+											"type": "secret"
 										},
 										{
 											"key": "username",
@@ -302,7 +302,7 @@
 										{
 											"key": "password",
 											"value": "{{application-client-secret}}",
-											"type": "string"
+											"type": "secret"
 										},
 										{
 											"key": "username",
