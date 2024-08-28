@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d4aac8e8-e58c-4a14-8be9-2ac34cd05b9a",
+		"_postman_id": "939163ae-133b-4826-a521-85686ba77f87",
 		"name": "Open Gateway",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "13571917"
@@ -228,6 +228,9 @@
 									}
 								}
 							],
+							"protocolProfileBehavior": {
+								"followRedirects": false
+							},
 							"request": {
 								"auth": {
 									"type": "noauth"
@@ -357,7 +360,7 @@
 			"name": "Service APIs",
 			"item": [
 				{
-					"name": "SIM Swap",
+					"name": "SIM Swap v0.4.0",
 					"item": [
 						{
 							"name": "SIM Swap check",
@@ -440,7 +443,7 @@
 					]
 				},
 				{
-					"name": "Number Verification",
+					"name": "Number Verification v0.3.1",
 					"item": [
 						{
 							"name": "Number Verification verify",
@@ -484,10 +487,98 @@
 					]
 				},
 				{
-					"name": "Mobile QoD",
+					"name": "Device Location v0.1.0",
 					"item": [
 						{
-							"name": "QoD session v0.8",
+							"name": "Device Location verify",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"ueId\": {\n    \"msisdn\": \"{{enduser-identifier}}\"\n  },\n  \"latitude\": 50.735851,\n  \"longitude\": 7.10066,\n  \"accuracy\": 10\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-gateway-url}}/location/v0/verify",
+									"host": [
+										"{{api-gateway-url}}"
+									],
+									"path": [
+										"location",
+										"v0",
+										"verify"
+									]
+								},
+								"description": "Check the API reference at [https://github.com/camaraproject/DeviceLocation/blob/release-v0.1.0/code/API_definitions/location.yaml](https://github.com/camaraproject/DeviceLocation/blob/release-v0.1.0/code/API_definitions/location.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#location-verification-verify`"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Device Status v0.4.1",
+					"item": [
+						{
+							"name": "Device Status Roaming",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"ueId\": {\n    \"msisdn\": \"{{enduser-identifier}}\"\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-gateway-url}}/device-status/v0/roaming",
+									"host": [
+										"{{api-gateway-url}}"
+									],
+									"path": [
+										"device-status",
+										"v0",
+										"roaming"
+									]
+								},
+								"description": "Check the API reference at [https://github.com/camaraproject/DeviceStatus/blob/release-0.4.1/code/API_definitions/device-status.yaml](https://github.com/camaraproject/DeviceStatus/blob/release-0.4.1/code/API_definitions/device-status.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-status-roaming-read`"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Mobile QoD v0.8.0",
+					"item": [
+						{
+							"name": "QoD session",
 							"event": [
 								{
 									"listen": "test",
@@ -634,7 +725,7 @@
 							]
 						},
 						{
-							"name": "QoD session v0.8",
+							"name": "QoD session",
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -671,7 +762,7 @@
 							"response": []
 						},
 						{
-							"name": "QoD session v0.8",
+							"name": "QoD session",
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -793,95 +884,7 @@
 					]
 				},
 				{
-					"name": "Device Location",
-					"item": [
-						{
-							"name": "Device Location verify v0.1",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"ueId\": {\n    \"msisdn\": \"{{enduser-identifier}}\"\n  },\n  \"latitude\": 50.735851,\n  \"longitude\": 7.10066,\n  \"accuracy\": 10\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{api-gateway-url}}/location/v0/verify",
-									"host": [
-										"{{api-gateway-url}}"
-									],
-									"path": [
-										"location",
-										"v0",
-										"verify"
-									]
-								},
-								"description": "Check the API reference at [https://github.com/camaraproject/DeviceLocation/blob/release-v0.1.0/code/API_definitions/location.yaml](https://github.com/camaraproject/DeviceLocation/blob/release-v0.1.0/code/API_definitions/location.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#location-verification-verify`"
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Device Status",
-					"item": [
-						{
-							"name": "Device Status Roaming v0.4.1",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"ueId\": {\n    \"msisdn\": \"{{enduser-identifier}}\"\n  }\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{api-gateway-url}}/device-status/v0/roaming",
-									"host": [
-										"{{api-gateway-url}}"
-									],
-									"path": [
-										"device-status",
-										"v0",
-										"roaming"
-									]
-								},
-								"description": "Check the API reference at [https://github.com/camaraproject/DeviceStatus/blob/release-0.4.1/code/API_definitions/device-status.yaml](https://github.com/camaraproject/DeviceStatus/blob/release-0.4.1/code/API_definitions/device-status.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-status-roaming-read`"
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "KYC",
+					"name": "Know Your Customer",
 					"item": [
 						{
 							"name": "KYC match v0.1",
