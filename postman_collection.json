@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "939163ae-133b-4826-a521-85686ba77f87",
+		"_postman_id": "e591e9cf-ab96-4afe-a259-6c9408d1979a",
 		"name": "Open Gateway",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "13571917"
@@ -34,7 +34,7 @@
 										{
 											"key": "password",
 											"value": "{{application-client-secret}}",
-											"type": "secret"
+											"type": "string"
 										},
 										{
 											"key": "username",
@@ -71,7 +71,7 @@
 										"bc-authorize"
 									]
 								},
-								"description": "This is the 1st request of the CIBA flow. Check CAMARA documentation at [https://github.com/camaraproject/IdentityAndConsentManagement/blob/release-0.1.0/documentation/CAMARA-API-access-and-user-consent.md#ciba-flow-backend-flow](https://github.com/camaraproject/IdentityAndConsentManagement/blob/release-0.1.0/documentation/CAMARA-API-access-and-user-consent.md#ciba-flow-backend-flow)\n\nCheck the proper purpose to use for each API in the request documentation at the Service APIs folder.\n\nE.g. for SIM Swap `dpv:FraudPreventionAndDetection#sim-swap`"
+								"description": "This is the 1st request of the CIBA flow.\n\nCheck our guide here [https://developers.opengateway.telefonica.com/docs/backend](https://developers.opengateway.telefonica.com/docs/backend)\n\nCheck the proper purpose to use for each API in the request documentation at the Service APIs folder.\n\nE.g. for SIM Swap `dpv:FraudPreventionAndDetection#sim-swap`"
 							},
 							"response": [
 								{
@@ -168,7 +168,7 @@
 										{
 											"key": "password",
 											"value": "{{application-client-secret}}",
-											"type": "secret"
+											"type": "string"
 										},
 										{
 											"key": "username",
@@ -205,7 +205,7 @@
 										"token"
 									]
 								},
-								"description": "This is the 2nd request of the CIBA flow. Check CAMARA documentation at [https://github.com/camaraproject/IdentityAndConsentManagement/blob/release-0.1.0/documentation/CAMARA-API-access-and-user-consent.md#ciba-flow-backend-flow](https://github.com/camaraproject/IdentityAndConsentManagement/blob/release-0.1.0/documentation/CAMARA-API-access-and-user-consent.md#ciba-flow-backend-flow)\n\nIn case the purpose used in the 1st step needed end-user consent, it should be captured in an out-of-band flow."
+								"description": "This is the 2nd request of the CIBA flow.\n\nCheck our guide here [https://developers.opengateway.telefonica.com/docs/backend](https://developers.opengateway.telefonica.com/docs/backend)\n\nIn case the purpose used in the 1st step needed end-user consent, it should be captured in an out-of-band flow."
 							},
 							"response": []
 						}
@@ -254,7 +254,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{auth-gateway-url}}/authorize?client_id={{application-client-id}}&response_type=code&purpose={{api-product-purpose}}&redirect_uri={{application-backend-callback-url}}&state={{enduser-identifier}}",
+									"raw": "{{auth-gateway-url}}/authorize?client_id={{application-client-id}}&response_type=code&purpose={{api-product-purpose}}&redirect_uri={{application-backend-callback-url}}&state={{enduser-identifier}}&login_hint={{identifier-type}}:{{enduser-identifier}}",
 									"host": [
 										"{{auth-gateway-url}}"
 									],
@@ -288,6 +288,11 @@
 											"description": "Anything you need to share between your app components related to your session or transaction. You will want to pass the end-user's phone number if you need it at backend to perform a request to the service API"
 										},
 										{
+											"key": "login_hint",
+											"value": "{{identifier-type}}:{{enduser-identifier}}",
+											"description": "If using the Telefonica Sandbox, use this param to identify your whitelisted phone number"
+										},
+										{
 											"key": "nonce",
 											"value": "request_nonce",
 											"description": "In order to identify each request",
@@ -295,7 +300,7 @@
 										}
 									]
 								},
-								"description": "This is the 1st request of the Auth Code flow. Check CAMARA documentation at [https://github.com/camaraproject/IdentityAndConsentManagement/blob/release-0.1.0/documentation/CAMARA-API-access-and-user-consent.md#authorization-code-flow-frontend-flow](https://github.com/camaraproject/IdentityAndConsentManagement/blob/release-0.1.0/documentation/CAMARA-API-access-and-user-consent.md#authorization-code-flow-frontend-flow)\n\nCheck the proper purpose to use for each API in the request documentation at the Service APIs folder.\n\nE.g. for SIM Swap `dpv:FraudPreventionAndDetection#sim-swap`\n\nThis request must be performed from the end-user's device since this authentication method consists of its IP address resolution to identify them. It has been included in this collection as a reference. Sending it from Postman just won't work, since the client must follow redirections until reaching the `redirect_uri`. In order to test it, copy the URL resolved with your values (you can find it in this very Documentation tab) and paste it in your browser running on the end-user's device.\n\nYou will need to publish an HTTP server to listen for the `redirect_uri` where the code will be redirected to."
+								"description": "This is the 1st request of the Auth Code flow.\n\nCheck our guide here [https://developers.opengateway.telefonica.com/docs/frontend](https://developers.opengateway.telefonica.com/docs/frontend)\n\nCheck the proper purpose to use for each API in the request documentation at the Service APIs folder.\n\nE.g. for SIM Swap `dpv:FraudPreventionAndDetection#sim-swap`\n\nThis request must be performed from the end-user's device since this authentication method consists of its IP address resolution to identify them. It has been included in this collection as a reference. Sending it from Postman just won't work, since the client must follow redirections until reaching the `redirect_uri`. In order to test it, copy the URL resolved with your values (you can find it in this very Documentation tab) and paste it in your browser running on the end-user's device.\n\nYou will need to publish an HTTP server to listen for the `redirect_uri` where the code will be redirected to."
 							},
 							"response": []
 						},
@@ -321,7 +326,7 @@
 										{
 											"key": "password",
 											"value": "{{application-client-secret}}",
-											"type": "secret"
+											"type": "string"
 										},
 										{
 											"key": "username",
@@ -364,7 +369,7 @@
 										"token"
 									]
 								},
-								"description": "This is the 2nd request of the Auth Code flow. Check CAMARA documentation at [https://github.com/camaraproject/IdentityAndConsentManagement/blob/release-0.1.0/documentation/CAMARA-API-access-and-user-consent.md#authorization-code-flow-frontend-flow](https://github.com/camaraproject/IdentityAndConsentManagement/blob/release-0.1.0/documentation/CAMARA-API-access-and-user-consent.md#authorization-code-flow-frontend-flow)\n\nThis request is supposed to be performed from your backend, from where you publish your `redirect_uri` listening for the code requested in the 1st step.\n\nIn case the purpose used in the 1st step needed end-user consent, it will redirect such first request to the proper consent capture web page previous to the redirect to your redirect_uri."
+								"description": "This is the 2nd request of the Auth Code flow.\n\nCheck our guide here [https://developers.opengateway.telefonica.com/docs/frontend](https://developers.opengateway.telefonica.com/docs/frontend)\n\nThis request is supposed to be performed from your backend, from where you publish your `redirect_uri` listening for the code requested in the 1st step.\n\nIn case the purpose used in the 1st step needed end-user consent, it will redirect such first request to the proper consent capture web page previous to the redirect to your redirect_uri."
 							},
 							"response": []
 						}
@@ -413,7 +418,7 @@
 										"check"
 									]
 								},
-								"description": "Check the API reference at [https://github.com/camaraproject/SimSwap/blob/main/code/API_definitions/sim_swap.yaml](https://github.com/camaraproject/SimSwap/blob/main/code/API_definitions/sim_swap.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#sim-swap`"
+								"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/checksimswap](https://developers.opengateway.telefonica.com/reference/checksimswap)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#sim-swap`"
 							},
 							"response": []
 						},
@@ -452,7 +457,7 @@
 										"retrieve-date"
 									]
 								},
-								"description": "Check the API reference at [https://github.com/camaraproject/SimSwap/blob/main/code/API_definitions/sim_swap.yaml](https://github.com/camaraproject/SimSwap/blob/main/code/API_definitions/sim_swap.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#sim-swap`"
+								"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/retrievesimswapdate](https://developers.opengateway.telefonica.com/reference/retrievesimswapdate)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#sim-swap`"
 							},
 							"response": []
 						}
@@ -496,7 +501,7 @@
 										"verify"
 									]
 								},
-								"description": "Check the API reference at [https://github.com/camaraproject/NumberVerification/blob/main/code/API_definitions/number_verification.yaml](https://github.com/camaraproject/NumberVerification/blob/main/code/API_definitions/number_verification.yaml)\n\nUse the frontend Auth Code flow in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#number-verification-verify-read`"
+								"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/phonenumberverify](https://developers.opengateway.telefonica.com/reference/phonenumberverify)\n\nUse the frontend Auth Code flow in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#number-verification-verify-read`"
 							},
 							"response": []
 						}
@@ -540,7 +545,7 @@
 										"verify"
 									]
 								},
-								"description": "Check the API reference at [https://github.com/camaraproject/DeviceLocation/blob/release-v0.1.0/code/API_definitions/location.yaml](https://github.com/camaraproject/DeviceLocation/blob/release-v0.1.0/code/API_definitions/location.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-location-read`"
+								"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/verifylocation-1](https://developers.opengateway.telefonica.com/reference/verifylocation-1)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-location-read`"
 							},
 							"response": []
 						}
@@ -584,7 +589,7 @@
 										"roaming"
 									]
 								},
-								"description": "Check the API reference at [https://github.com/camaraproject/DeviceStatus/blob/release-0.4.1/code/API_definitions/device-status.yaml](https://github.com/camaraproject/DeviceStatus/blob/release-0.4.1/code/API_definitions/device-status.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-status-roaming-read`"
+								"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/getroamingstatus](https://developers.opengateway.telefonica.com/reference/getroamingstatus)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-status-roaming-read`"
 							},
 							"response": []
 						}
