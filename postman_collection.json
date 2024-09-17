@@ -218,6 +218,22 @@
 							"name": "1st Authorization request",
 							"event": [
 								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"if (pm.environment.get('api-product-purpose').indexOf('#') > 0) {",
+											"    pm.environment.set(",
+											"        'api-product-purpose',",
+											"        encodeURIComponent(pm.environment.get('api-product-purpose'))",
+											"    )",
+											"}",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
 									"listen": "test",
 									"script": {
 										"exec": [
@@ -524,7 +540,7 @@
 										"verify"
 									]
 								},
-								"description": "Check the API reference at [https://github.com/camaraproject/DeviceLocation/blob/release-v0.1.0/code/API_definitions/location.yaml](https://github.com/camaraproject/DeviceLocation/blob/release-v0.1.0/code/API_definitions/location.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#location-verification-verify`"
+								"description": "Check the API reference at [https://github.com/camaraproject/DeviceLocation/blob/release-v0.1.0/code/API_definitions/location.yaml](https://github.com/camaraproject/DeviceLocation/blob/release-v0.1.0/code/API_definitions/location.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-location-read`"
 							},
 							"response": []
 						}
