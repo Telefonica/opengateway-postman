@@ -227,7 +227,13 @@
 											"        encodeURIComponent(pm.environment.get('api-product-purpose'))",
 											"    )",
 											"}",
-											""
+											"var { key, value } = pm.request.url.query.find(param => param.key === 'state')",
+											"if (value && value.indexOf('{{') === 0) {",
+											"    const variable = value.replace('{{', '').replace('}}', '')",
+											"    value = pm.variables.get(variable)",
+											"}",
+											"pm.request.removeQueryParams(key)",
+											"pm.request.addQueryParams(`${key}=${encodeURIComponent(value)}`)"
 										],
 										"type": "text/javascript",
 										"packages": {}
