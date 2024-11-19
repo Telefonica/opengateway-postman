@@ -387,7 +387,7 @@
 			"name": "Service APIs",
 			"item": [
 				{
-					"name": "SIM Swap v0.4.0",
+					"name": "SIM Swap v0.4",
 					"item": [
 						{
 							"name": "SIM Swap check",
@@ -470,7 +470,7 @@
 					]
 				},
 				{
-					"name": "Number Verification v0.3.1",
+					"name": "Number Verification v0.3",
 					"item": [
 						{
 							"name": "Number Verification verify",
@@ -514,7 +514,7 @@
 					]
 				},
 				{
-					"name": "Device Location v0.1.0",
+					"name": "Device Location v0.1",
 					"item": [
 						{
 							"name": "Device Location verify",
@@ -558,7 +558,7 @@
 					]
 				},
 				{
-					"name": "Device Status v0.4.1",
+					"name": "Device Status v0.4",
 					"item": [
 						{
 							"name": "Device Status Roaming",
@@ -602,7 +602,7 @@
 					]
 				},
 				{
-					"name": "Mobile QoD v0.8.0",
+					"name": "Mobile QoD v0.8",
 					"item": [
 						{
 							"name": "QoD session",
@@ -652,7 +652,7 @@
 										"sessions"
 									]
 								},
-								"description": "Check the API reference at [https://github.com/camaraproject/QualityOnDemand/blob/release-0.8.0/code/API_definitions/qod-api.yaml](https://github.com/camaraproject/QualityOnDemand/blob/release-0.8.0/code/API_definitions/qod-api.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:RequestedServiceProvision#qod`"
+								"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/createsession](https://developers.opengateway.telefonica.com/reference/createsession)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:RequestedServiceProvision#qod`"
 							},
 							"response": [
 								{
@@ -784,7 +784,7 @@
 										}
 									]
 								},
-								"description": "Check the API reference at [https://github.com/camaraproject/QualityOnDemand/blob/release-0.8.0/code/API_definitions/qod-api.yaml](https://github.com/camaraproject/QualityOnDemand/blob/release-0.8.0/code/API_definitions/qod-api.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:RequestedServiceProvision#qod`"
+								"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/deletesession](https://developers.opengateway.telefonica.com/reference/deletesession)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:RequestedServiceProvision#qod`"
 							},
 							"response": []
 						},
@@ -821,7 +821,51 @@
 										}
 									]
 								},
-								"description": "Check the API reference at [https://github.com/camaraproject/QualityOnDemand/blob/release-0.8.0/code/API_definitions/qod-api.yaml](https://github.com/camaraproject/QualityOnDemand/blob/release-0.8.0/code/API_definitions/qod-api.yaml)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:RequestedServiceProvision#qod`"
+								"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/getsession](https://developers.opengateway.telefonica.com/reference/getsession)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:RequestedServiceProvision#qod`"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Know Your Customer v0.1",
+					"item": [
+						{
+							"name": "KYC match",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"birthdate\": \"1974-06-10\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-gateway-url}}/kyc-match/v0/match",
+									"host": [
+										"{{api-gateway-url}}"
+									],
+									"path": [
+										"kyc-match",
+										"v0",
+										"match"
+									]
+								},
+								"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/kyc_match_v01](https://developers.opengateway.telefonica.com/reference/kyc_match_v01)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#kyc-match`"
 							},
 							"response": []
 						}
