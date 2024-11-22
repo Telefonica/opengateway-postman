@@ -55,7 +55,7 @@
 											"type": "text"
 										},
 										{
-											"key": "purpose",
+											"key": "scope",
 											"value": "{{api-product-purpose}}",
 											"description": "Format = dpv:w3c-purpose#api-scope",
 											"type": "text"
@@ -260,7 +260,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{auth-gateway-url}}/authorize?client_id={{application-client-id}}&response_type=code&purpose={{api-product-purpose}}&redirect_uri={{application-backend-callback-url}}&state={{enduser-identifier}}&login_hint={{identifier-type}}:{{enduser-identifier}}",
+									"raw": "{{auth-gateway-url}}/authorize?client_id={{application-client-id}}&response_type=code&scope={{api-product-purpose}}&redirect_uri={{application-backend-callback-url}}&state={{enduser-identifier}}&login_hint={{identifier-type}}:{{enduser-identifier}}",
 									"host": [
 										"{{auth-gateway-url}}"
 									],
@@ -279,7 +279,7 @@
 											"description": "Fixed value for this authentication method"
 										},
 										{
-											"key": "purpose",
+											"key": "scope",
 											"value": "{{api-product-purpose}}",
 											"description": "According to the product's purpose and scope. Check Service API request's documentation"
 										},
