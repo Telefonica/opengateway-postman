@@ -865,7 +865,7 @@
 										"match"
 									]
 								},
-								"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/kyc_match_v01](https://developers.opengateway.telefonica.com/reference/kyc_match_v01)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#kyc-match`"
+								"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/kyc_match_v01](https://developers.opengateway.telefonica.com/reference/kyc_match_v01)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#know-your-customer:match`"
 							},
 							"response": []
 						}
