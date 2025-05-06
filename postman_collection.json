@@ -209,7 +209,8 @@
 							},
 							"response": []
 						}
-					]
+					],
+					"description": "[https://developers.opengateway.telefonica.com/docs/backend](https://developers.opengateway.telefonica.com/docs/backend)"
 				},
 				{
 					"name": "Auth code (Frontend)",
@@ -379,285 +380,326 @@
 							},
 							"response": []
 						}
-					]
+					],
+					"description": "[https://developers.opengateway.telefonica.com/docs/frontend](https://developers.opengateway.telefonica.com/docs/frontend)"
 				}
-			]
+			],
+			"description": "[https://developers.opengateway.telefonica.com/docs/authorization](https://developers.opengateway.telefonica.com/docs/authorization)"
 		},
 		{
 			"name": "Service APIs",
 			"item": [
 				{
-					"name": "SIM Swap v0.4",
+					"name": "SIM Swap",
 					"item": [
 						{
-							"name": "SIM Swap check",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
+							"name": "v0.4",
+							"item": [
+								{
+									"name": "SIM Swap check",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"phoneNumber\": \"{{enduser-identifier}}\",\n    \"maxAge\": 2400\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{api-gateway-url}}/sim-swap/v0/check",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"sim-swap",
+												"v0",
+												"check"
+											]
+										},
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/checksimswap](https://developers.opengateway.telefonica.com/reference/checksimswap)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#sim-swap`"
+									},
+									"response": []
 								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"phoneNumber\": \"{{enduser-identifier}}\",\n    \"maxAge\": 2400\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{api-gateway-url}}/sim-swap/v0/check",
-									"host": [
-										"{{api-gateway-url}}"
-									],
-									"path": [
-										"sim-swap",
-										"v0",
-										"check"
-									]
-								},
-								"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/checksimswap](https://developers.opengateway.telefonica.com/reference/checksimswap)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#sim-swap`"
-							},
-							"response": []
+								{
+									"name": "SIM Swap retrieve date",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"phoneNumber\": \"{{enduser-identifier}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{api-gateway-url}}/sim-swap/v0/retrieve-date",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"sim-swap",
+												"v0",
+												"retrieve-date"
+											]
+										},
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/retrievesimswapdate](https://developers.opengateway.telefonica.com/reference/retrievesimswapdate)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#sim-swap`"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Number Verification",
+					"item": [
+						{
+							"name": "v0.3",
+							"item": [
+								{
+									"name": "Number Verification verify",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"phoneNumber\": \"{{enduser-identifier}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{api-gateway-url}}/number-verification/v0/verify",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"number-verification",
+												"v0",
+												"verify"
+											]
+										},
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/phonenumberverify-2](https://developers.opengateway.telefonica.com/reference/phonenumberverify-2)\n\nUse the frontend Auth Code flow in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#number-verification-verify-read`"
+									},
+									"response": []
+								}
+							]
 						},
 						{
-							"name": "SIM Swap retrieve date",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"phoneNumber\": \"{{enduser-identifier}}\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{api-gateway-url}}/sim-swap/v0/retrieve-date",
-									"host": [
-										"{{api-gateway-url}}"
-									],
-									"path": [
-										"sim-swap",
-										"v0",
-										"retrieve-date"
-									]
-								},
-								"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/retrievesimswapdate](https://developers.opengateway.telefonica.com/reference/retrievesimswapdate)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#sim-swap`"
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Number Verification v0.3",
-					"item": [
-						{
-							"name": "Number Verification verify",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"phoneNumber\": \"{{enduser-identifier}}\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{api-gateway-url}}/number-verification/v0/verify",
-									"host": [
-										"{{api-gateway-url}}"
-									],
-									"path": [
-										"number-verification",
-										"v0",
-										"verify"
-									]
-								},
-								"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/phonenumberverify](https://developers.opengateway.telefonica.com/reference/phonenumberverify)\n\nUse the frontend Auth Code flow in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#number-verification-verify-read`"
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Device Location v0.1",
-					"item": [
-						{
-							"name": "Device Location verify",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"ueId\": {\n    \"msisdn\": \"{{enduser-identifier}}\"\n  },\n  \"latitude\": 50.735851,\n  \"longitude\": 7.10066,\n  \"accuracy\": 10\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{api-gateway-url}}/location/v0/verify",
-									"host": [
-										"{{api-gateway-url}}"
-									],
-									"path": [
-										"location",
-										"v0",
-										"verify"
-									]
-								},
-								"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/verifylocation-1](https://developers.opengateway.telefonica.com/reference/verifylocation-1)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-location-read`"
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Device Status v0.4",
-					"item": [
-						{
-							"name": "Device Status Roaming",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"ueId\": {\n    \"msisdn\": \"{{enduser-identifier}}\"\n  }\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{api-gateway-url}}/device-status/v0/roaming",
-									"host": [
-										"{{api-gateway-url}}"
-									],
-									"path": [
-										"device-status",
-										"v0",
-										"roaming"
-									]
-								},
-								"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/getroamingstatus](https://developers.opengateway.telefonica.com/reference/getroamingstatus)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-status-roaming-read`"
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "Mobile QoD v0.8",
-					"item": [
-						{
-							"name": "QoD session",
-							"event": [
+							"name": "v1.0",
+							"item": [
 								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonData = JSON.parse(pm.response.text());",
-											"pm.environment.set(\"qod_session_id\", jsonData.id);"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
+									"name": "Number Verification verify",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"phoneNumber\": \"{{enduser-identifier}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{api-gateway-url}}/number-verification/v1/verify",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"number-verification",
+												"v1",
+												"verify"
+											]
+										},
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/phonenumberverify-2](https://developers.opengateway.telefonica.com/reference/phonenumberverify-2)\n\nUse the frontend Auth Code flow in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection number-verification:verify`"
+									},
+									"response": []
 								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"duration\": 3600,\n    \"ueId\": {\n        \"msisdn\": \"{{enduser-identifier}}\"\n    },\n    \"asId\": {\n        \"ipv4addr\": \"0.0.0.0/0\"\n    },\n    \"qos\": \"QOS_E\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{api-gateway-url}}/qod/v0/sessions",
-									"host": [
-										"{{api-gateway-url}}"
-									],
-									"path": [
-										"qod",
-										"v0",
-										"sessions"
-									]
-								},
-								"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/createsession](https://developers.opengateway.telefonica.com/reference/createsession)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:RequestedServiceProvision#qod`"
-							},
-							"response": [
+							]
+						}
+					]
+				},
+				{
+					"name": "Device Location",
+					"item": [
+						{
+							"name": "v0.1",
+							"item": [
 								{
-									"name": "Response example",
-									"originalRequest": {
+									"name": "Device Location verify",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"ueId\": {\n    \"msisdn\": \"{{enduser-identifier}}\"\n  },\n  \"latitude\": 50.735851,\n  \"longitude\": 7.10066,\n  \"accuracy\": 10\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{api-gateway-url}}/location/v0/verify",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"location",
+												"v0",
+												"verify"
+											]
+										},
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/verifylocation-2](https://developers.opengateway.telefonica.com/reference/verifylocation-2)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-location-read`"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Device Status",
+					"item": [
+						{
+							"name": "v0.4",
+							"item": [
+								{
+									"name": "Device Status Roaming",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"ueId\": {\n    \"msisdn\": \"{{enduser-identifier}}\"\n  }\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{api-gateway-url}}/device-status/v0/roaming",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"device-status",
+												"v0",
+												"roaming"
+											]
+										},
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/getroamingstatus-2](https://developers.opengateway.telefonica.com/reference/getroamingstatus-2)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-status-roaming-read`"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Mobile QoD",
+					"item": [
+						{
+							"name": "v0.8",
+							"item": [
+								{
+									"name": "QoD session",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = JSON.parse(pm.response.text());",
+													"pm.environment.set(\"qod_session_id\", jsonData.id);"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
 										"method": "POST",
 										"header": [],
 										"body": {
@@ -679,282 +721,670 @@
 												"v0",
 												"sessions"
 											]
-										}
+										},
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/v0.8/reference/createsession-2](https://developers.opengateway.telefonica.com/v0.8/reference/createsession-2)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:RequestedServiceProvision#qod`"
 									},
-									"status": "Created",
-									"code": 201,
-									"_postman_previewlanguage": "json",
-									"header": [
+									"response": [
 										{
-											"key": "Date",
-											"value": "Tue, 13 Aug 2024 13:49:52 GMT"
-										},
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										},
-										{
-											"key": "Content-Length",
-											"value": "186"
-										},
-										{
-											"key": "Connection",
-											"value": "keep-alive"
-										},
-										{
-											"key": "Content-Security-Policy",
-											"value": "default-src https:"
-										},
-										{
-											"key": "Ratelimit-Limit",
-											"value": "36000"
-										},
-										{
-											"key": "Ratelimit-Remaining",
-											"value": "35999"
-										},
-										{
-											"key": "Ratelimit-Reset",
-											"value": "8"
-										},
-										{
-											"key": "Referrer-Policy",
-											"value": "no-referrer"
-										},
-										{
-											"key": "Strict-Transport-Security",
-											"value": "max-age=315360000; includeSubDomains; preload"
-										},
-										{
-											"key": "X-Content-Type-Options",
-											"value": "nosniff"
-										},
-										{
-											"key": "X-Correlator",
-											"value": "018b1b47-7a35-cc90-b6ee-951ba0637d9e"
-										},
-										{
-											"key": "X-Frame-Options",
-											"value": "SAMEORIGIN"
-										},
-										{
-											"key": "X-Ratelimit-Limit-Minute",
-											"value": "36000"
-										},
-										{
-											"key": "X-Ratelimit-Remaining-Minute",
-											"value": "35999"
+											"name": "Response example",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"duration\": 3600,\n    \"ueId\": {\n        \"msisdn\": \"{{enduser-identifier}}\"\n    },\n    \"asId\": {\n        \"ipv4addr\": \"0.0.0.0/0\"\n    },\n    \"qos\": \"QOS_E\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{api-gateway-url}}/qod/v0/sessions",
+													"host": [
+														"{{api-gateway-url}}"
+													],
+													"path": [
+														"qod",
+														"v0",
+														"sessions"
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Date",
+													"value": "Tue, 13 Aug 2024 13:49:52 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Content-Length",
+													"value": "186"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Content-Security-Policy",
+													"value": "default-src https:"
+												},
+												{
+													"key": "Ratelimit-Limit",
+													"value": "36000"
+												},
+												{
+													"key": "Ratelimit-Remaining",
+													"value": "35999"
+												},
+												{
+													"key": "Ratelimit-Reset",
+													"value": "8"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "no-referrer"
+												},
+												{
+													"key": "Strict-Transport-Security",
+													"value": "max-age=315360000; includeSubDomains; preload"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "X-Correlator",
+													"value": "018b1b47-7a35-cc90-b6ee-951ba0637d9e"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "SAMEORIGIN"
+												},
+												{
+													"key": "X-Ratelimit-Limit-Minute",
+													"value": "36000"
+												},
+												{
+													"key": "X-Ratelimit-Remaining-Minute",
+													"value": "35999"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"duration\": 3600,\n    \"ueId\": {\n        \"msisdn\": \"+34600666006\"\n    },\n    \"asId\": {\n        \"ipv4addr\": \"0.0.0.0/0\"\n    },\n    \"qos\": \"QOS_E\",\n    \"id\": \"6f3e1691-cb74-4044-95aa-a95456409b23\",\n    \"startedAt\": 1723556992,\n    \"expiresAt\": 1723560592\n}"
 										}
-									],
-									"cookie": [],
-									"body": "{\n    \"duration\": 3600,\n    \"ueId\": {\n        \"msisdn\": \"+34600666006\"\n    },\n    \"asId\": {\n        \"ipv4addr\": \"0.0.0.0/0\"\n    },\n    \"qos\": \"QOS_E\",\n    \"id\": \"6f3e1691-cb74-4044-95aa-a95456409b23\",\n    \"startedAt\": 1723556992,\n    \"expiresAt\": 1723560592\n}"
+									]
+								},
+								{
+									"name": "QoD session",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{api-gateway-url}}/qod/v0/sessions/:id",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"qod",
+												"v0",
+												"sessions",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{qod_session_id}}"
+												}
+											]
+										},
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/v0.8/reference/deletesession-2](https://developers.opengateway.telefonica.com/v0.8/reference/deletesession-2)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:RequestedServiceProvision#qod`"
+									},
+									"response": []
+								},
+								{
+									"name": "QoD session",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{api-gateway-url}}/qod/v0/sessions/:id",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"qod",
+												"v0",
+												"sessions",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{qod_session_id}}"
+												}
+											]
+										},
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/v0.8/reference/getsession-2](https://developers.opengateway.telefonica.com/v0.8/reference/getsession-2)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:RequestedServiceProvision#qod`"
+									},
+									"response": []
 								}
 							]
 						},
 						{
-							"name": "QoD session",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
+							"name": "v0.10",
+							"item": [
+								{
+									"name": "Profiles",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{api-gateway-url}}/qod/v0/qos-profiles",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"qod",
+												"v0",
+												"qos-profiles"
+											]
+										},
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/getqosprofiles-2](https://developers.opengateway.telefonica.com/reference/getqosprofiles-2)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:RequestedServiceProvision#qod`"
+									},
+									"response": []
+								},
+								{
+									"name": "QoD session",
+									"event": [
 										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = JSON.parse(pm.response.text());",
+													"pm.environment.set(\"qod_session_id\", jsonData.id);"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"duration\": 3600,\n    \"device\": {\n        \"phoneNumber\": \"{{enduser-identifier}}\"\n    },\n    \"applicationServer\": {\n        \"ipv4Address\": \"0.0.0.0/0\"\n    },\n    \"qosProfile\": \"TI_B2C\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{api-gateway-url}}/qod/v0/sessions",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"qod",
+												"v0",
+												"sessions"
+											]
+										},
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/createsession-2](https://developers.opengateway.telefonica.com/reference/createsession-2)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:RequestedServiceProvision#qod`"
+									},
+									"response": [
+										{
+											"name": "Response example",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"duration\": 3600,\n    \"ueId\": {\n        \"msisdn\": \"{{enduser-identifier}}\"\n    },\n    \"asId\": {\n        \"ipv4addr\": \"0.0.0.0/0\"\n    },\n    \"qos\": \"QOS_E\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{api-gateway-url}}/qod/v0/sessions",
+													"host": [
+														"{{api-gateway-url}}"
+													],
+													"path": [
+														"qod",
+														"v0",
+														"sessions"
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Date",
+													"value": "Tue, 13 Aug 2024 13:49:52 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Content-Length",
+													"value": "186"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Content-Security-Policy",
+													"value": "default-src https:"
+												},
+												{
+													"key": "Ratelimit-Limit",
+													"value": "36000"
+												},
+												{
+													"key": "Ratelimit-Remaining",
+													"value": "35999"
+												},
+												{
+													"key": "Ratelimit-Reset",
+													"value": "8"
+												},
+												{
+													"key": "Referrer-Policy",
+													"value": "no-referrer"
+												},
+												{
+													"key": "Strict-Transport-Security",
+													"value": "max-age=315360000; includeSubDomains; preload"
+												},
+												{
+													"key": "X-Content-Type-Options",
+													"value": "nosniff"
+												},
+												{
+													"key": "X-Correlator",
+													"value": "018b1b47-7a35-cc90-b6ee-951ba0637d9e"
+												},
+												{
+													"key": "X-Frame-Options",
+													"value": "SAMEORIGIN"
+												},
+												{
+													"key": "X-Ratelimit-Limit-Minute",
+													"value": "36000"
+												},
+												{
+													"key": "X-Ratelimit-Remaining-Minute",
+													"value": "35999"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"duration\": 3600,\n    \"ueId\": {\n        \"msisdn\": \"+34600666006\"\n    },\n    \"asId\": {\n        \"ipv4addr\": \"0.0.0.0/0\"\n    },\n    \"qos\": \"QOS_E\",\n    \"id\": \"6f3e1691-cb74-4044-95aa-a95456409b23\",\n    \"startedAt\": 1723556992,\n    \"expiresAt\": 1723560592\n}"
 										}
 									]
 								},
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "{{api-gateway-url}}/qod/v0/sessions/:id",
-									"host": [
-										"{{api-gateway-url}}"
-									],
-									"path": [
-										"qod",
-										"v0",
-										"sessions",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "{{qod_session_id}}"
-										}
-									]
+								{
+									"name": "QoD session",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{api-gateway-url}}/qod/v0/sessions/:id",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"qod",
+												"v0",
+												"sessions",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{qod_session_id}}"
+												}
+											]
+										},
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/deletesession-2](https://developers.opengateway.telefonica.com/reference/deletesession-2)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:RequestedServiceProvision#qod`"
+									},
+									"response": []
 								},
-								"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/deletesession](https://developers.opengateway.telefonica.com/reference/deletesession)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:RequestedServiceProvision#qod`"
-							},
-							"response": []
-						},
-						{
-							"name": "QoD session",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
+								{
+									"name": "QoD session",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{api-gateway-url}}/qod/v0/sessions/:id",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"qod",
+												"v0",
+												"sessions",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{qod_session_id}}"
+												}
+											]
+										},
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/getsession-2](https://developers.opengateway.telefonica.com/reference/getsession-2)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:RequestedServiceProvision#qod`"
+									},
+									"response": []
 								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{api-gateway-url}}/qod/v0/sessions/:id",
-									"host": [
-										"{{api-gateway-url}}"
-									],
-									"path": [
-										"qod",
-										"v0",
-										"sessions",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "id",
-											"value": "{{qod_session_id}}"
-										}
-									]
-								},
-								"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/getsession](https://developers.opengateway.telefonica.com/reference/getsession)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:RequestedServiceProvision#qod`"
-							},
-							"response": []
+								{
+									"name": "QoD session extend",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"requestedAdditionalDuration\": 60\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{api-gateway-url}}/qod/v0/sessions/:id/extend",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"qod",
+												"v0",
+												"sessions",
+												":id",
+												"extend"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "{{qod_session_id}}"
+												}
+											]
+										},
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/extendqossessionduration-2](https://developers.opengateway.telefonica.com/reference/extendqossessionduration-2)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:RequestedServiceProvision#qod`"
+									},
+									"response": []
+								}
+							]
 						}
 					]
 				},
 				{
-					"name": "Know Your Customer v0.1",
+					"name": "Know Your Customer",
 					"item": [
 						{
-							"name": "KYC match",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"birthdate\": \"1974-06-10\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{api-gateway-url}}/kyc-match/v0/match",
-									"host": [
-										"{{api-gateway-url}}"
-									],
-									"path": [
-										"kyc-match",
-										"v0",
-										"match"
-									]
-								},
-								"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/kyc_match_v01](https://developers.opengateway.telefonica.com/reference/kyc_match_v01)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#know-your-customer:match`"
-							},
-							"response": []
+							"name": "v0.1",
+							"item": [
+								{
+									"name": "KYC match",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Diego Rivera\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{api-gateway-url}}/kyc-match/v0/match",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"kyc-match",
+												"v0",
+												"match"
+											]
+										},
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/kyc_match_v01](https://developers.opengateway.telefonica.com/reference/kyc_match_v01)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#know-your-customer:match`"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "v0.2",
+							"item": [
+								{
+									"name": "KYC match",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Diego Manuel Rivera Núñez\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{api-gateway-url}}/kyc-match/v0.2/match",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"kyc-match",
+												"v0.2",
+												"match"
+											]
+										},
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/kyc_match_v01](https://developers.opengateway.telefonica.com/reference/kyc_match_v01)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#kyc-match:match`"
+									},
+									"response": []
+								}
+							]
 						}
 					]
 				},
 				{
-					"name": "Device Swap v0.1",
+					"name": "Device Swap",
 					"item": [
 						{
-							"name": "Device Swap check",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
+							"name": "v0.1",
+							"item": [
+								{
+									"name": "Device Swap check",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"phoneNumber\": \"{{enduser-identifier}}\",\n    \"maxAge\": 2400\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{api-gateway-url}}/device-swap/v0.1/check",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"device-swap",
+												"v0.1",
+												"check"
+											]
+										},
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/checkdeviceswap](https://developers.opengateway.telefonica.com/reference/checkdeviceswap)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-swap`"
+									},
+									"response": []
 								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"phoneNumber\": \"{{enduser-identifier}}\",\n    \"maxAge\": 2400\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{api-gateway-url}}/device-swap/v0.1/check",
-									"host": [
-										"{{api-gateway-url}}"
-									],
-									"path": [
-										"device-swap",
-										"v0.1",
-										"check"
-									]
-								},
-								"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/checkdeviceswap](https://developers.opengateway.telefonica.com/reference/checkdeviceswap)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-swap`"
-							},
-							"response": []
-						},
-						{
-							"name": "Device Swap retrieve date",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{access_token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"phoneNumber\": \"{{enduser-identifier}}\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{api-gateway-url}}/device-swap/v0.1/retrieve-date",
-									"host": [
-										"{{api-gateway-url}}"
-									],
-									"path": [
-										"device-swap",
-										"v0.1",
-										"retrieve-date"
-									]
-								},
-								"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/retrievedeviceswapdate](https://developers.opengateway.telefonica.com/reference/retrievedeviceswapdate)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-swap`"
-							},
-							"response": []
+								{
+									"name": "Device Swap retrieve date",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"phoneNumber\": \"{{enduser-identifier}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{api-gateway-url}}/device-swap/v0.1/retrieve-date",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"device-swap",
+												"v0.1",
+												"retrieve-date"
+											]
+										},
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/retrievedeviceswapdate](https://developers.opengateway.telefonica.com/reference/retrievedeviceswapdate)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-swap`"
+									},
+									"response": []
+								}
+							]
 						}
 					]
 				}
-			]
+			],
+			"description": "[https://opengateway.telefonica.com/en/apis](https://opengateway.telefonica.com/en/apis)"
 		}
 	]
 }

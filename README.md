@@ -17,7 +17,7 @@ This repository contains, for your convenience when testing the Open Gateway API
 		- `client-id` and `client-secret` to authenticate your app's requests
 		- `api-product-purpose` to specify the purpose of your app's API usage according to the API product being tested (check API's documentation in the Postman collection)
 		- `application-backend-callback-url` to point to your app's callback endpoint when authorized by using the OIDC's auth code flow
-		- `identifier-type` and `enduser-identifier` to provide an application's end-user identifier on the network (e.g., `phone_number`, `ipport`)
+		- `identifier-type` and `enduser-identifier` to provide an application's end-user identifier on the network (e.g., `tel`, `ipport`)
 
 ## How to import these files into Postman
 
