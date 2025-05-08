@@ -938,7 +938,7 @@
 											"script": {
 												"exec": [
 													"var jsonData = JSON.parse(pm.response.text());",
-													"pm.environment.set(\"qod_session_id\", jsonData.id);"
+													"pm.environment.set(\"qod_session_id\", jsonData.sessionId);"
 												],
 												"type": "text/javascript",
 												"packages": {}
