@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "e591e9cf-ab96-4afe-a259-6c9408d1979a",
+		"_postman_id": "de7d4b16-3b8e-4a47-9845-a1ba6c1828bd",
 		"name": "Open Gateway",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "13571917"
+		"_exporter_id": "13571917",
+		"_collection_link": "https://universal-crater-26893.postman.co/workspace/Telef%C3%B3nica~74386f95-ae5f-45cd-862a-5d9f88e4a89c/collection/13571917-de7d4b16-3b8e-4a47-9845-a1ba6c1828bd?action=share&source=collection_link&creator=13571917"
 	},
 	"item": [
 		{
@@ -612,6 +613,50 @@
 											]
 										},
 										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/verifylocation-2](https://developers.opengateway.telefonica.com/reference/verifylocation-2)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-location-read`"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "v0.2",
+							"item": [
+								{
+									"name": "Device Location verify",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"device\": {\n    \"phoneNumber\": \"{{enduser-identifier}}\"\n  },\n  \"area\": {\n    \"areaType\": \"CIRCLE\",\n    \"center\": {\n        \"latitude\": 50.735851,\n        \"longitude\": 7.10066\n    },\n    \"radius\": 5000\n  },\n  \"maxAge\": 120\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{api-gateway-url}}/location-verification/v0/verify",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"location-verification",
+												"v0",
+												"verify"
+											]
+										},
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/verifylocation-2](https://developers.opengateway.telefonica.com/reference/verifylocation-2)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#location-verification:verify`"
 									},
 									"response": []
 								}
