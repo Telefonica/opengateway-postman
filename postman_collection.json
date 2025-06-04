@@ -475,6 +475,89 @@
 									"response": []
 								}
 							]
+						},
+						{
+							"name": "v1.0",
+							"item": [
+								{
+									"name": "SIM Swap check",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"phoneNumber\": \"{{enduser-identifier}}\",\n    \"maxAge\": 2400\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{api-gateway-url}}/sim-swap/v1/check",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"sim-swap",
+												"v1",
+												"check"
+											]
+										},
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/v1/reference/checksimswap](https://developers.opengateway.telefonica.com/v1/reference/checksimswap)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection sim-swap`"
+									},
+									"response": []
+								},
+								{
+									"name": "SIM Swap retrieve date",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"phoneNumber\": \"{{enduser-identifier}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{api-gateway-url}}/sim-swap/v1/retrieve-date",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"sim-swap",
+												"v1",
+												"retrieve-date"
+											]
+										},
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/v1/reference/retrievesimswapdate](https://developers.opengateway.telefonica.com/v1/reference/retrievesimswapdate)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection sim-swap`"
+									},
+									"response": []
+								}
+							]
 						}
 					]
 				},
@@ -563,7 +646,7 @@
 												"verify"
 											]
 										},
-										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/phonenumberverify-2](https://developers.opengateway.telefonica.com/reference/phonenumberverify-2)\n\nUse the frontend Auth Code flow in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection number-verification:verify`"
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/v1/reference/phonenumberverify](https://developers.opengateway.telefonica.com/v1/reference/phonenumberverify)\n\nUse the frontend Auth Code flow in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection number-verification:verify`"
 									},
 									"response": []
 								}
@@ -656,7 +739,7 @@
 												"verify"
 											]
 										},
-										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/verifylocation-2](https://developers.opengateway.telefonica.com/reference/verifylocation-2)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#location-verification:verify`"
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/v0.2/reference/verifylocation](https://developers.opengateway.telefonica.com/v0.2/reference/verifylocation)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#location-verification:verify`"
 									},
 									"response": []
 								}
@@ -1288,7 +1371,7 @@
 												"match"
 											]
 										},
-										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/kyc_match_v01](https://developers.opengateway.telefonica.com/reference/kyc_match_v01)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#know-your-customer:match`"
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/v0.1/reference/kyc_match_v01](https://developers.opengateway.telefonica.com/v0.1/reference/kyc_match_v01)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#know-your-customer:match`"
 									},
 									"response": []
 								}
@@ -1332,7 +1415,7 @@
 												"match"
 											]
 										},
-										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/kyc_match_v01](https://developers.opengateway.telefonica.com/reference/kyc_match_v01)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#kyc-match:match`"
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/kyc_match_v02-2](https://developers.opengateway.telefonica.com/reference/kyc_match_v02-2)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#kyc-match:match`"
 									},
 									"response": []
 								}
@@ -1381,7 +1464,7 @@
 												"check"
 											]
 										},
-										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/checkdeviceswap](https://developers.opengateway.telefonica.com/reference/checkdeviceswap)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-swap`"
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/checkdeviceswap-3](https://developers.opengateway.telefonica.com/reference/checkdeviceswap-3)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-swap`"
 									},
 									"response": []
 								},
@@ -1420,7 +1503,7 @@
 												"retrieve-date"
 											]
 										},
-										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/retrievedeviceswapdate](https://developers.opengateway.telefonica.com/reference/retrievedeviceswapdate)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-swap`"
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/retrievedeviceswapdate-3](https://developers.opengateway.telefonica.com/reference/retrievedeviceswapdate-3)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-swap`"
 									},
 									"response": []
 								}
