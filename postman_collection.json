@@ -4,7 +4,7 @@
 		"name": "Open Gateway",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "13571917",
-		"_collection_link": "https://universal-crater-26893.postman.co/workspace/Telef%C3%B3nica~74386f95-ae5f-45cd-862a-5d9f88e4a89c/collection/13571917-de7d4b16-3b8e-4a47-9845-a1ba6c1828bd?action=share&source=collection_link&creator=13571917"
+		"_collection_link": "https://universal-crater-26893.postman.co/workspace/Telef%25C3%25B3nica~74386f95-ae5f-45cd-862a-5d9f88e4a89c/collection/13571917-de7d4b16-3b8e-4a47-9845-a1ba6c1828bd?action=share&source=collection_link&creator=13571917"
 	},
 	"item": [
 		{
@@ -1416,6 +1416,55 @@
 											]
 										},
 										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/kyc_match_v02-2](https://developers.opengateway.telefonica.com/reference/kyc_match_v02-2)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#kyc-match:match`"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Age Verification",
+					"item": [
+						{
+							"name": "v0.1",
+							"item": [
+								{
+									"name": "KYC Age verify",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"ageThreshold\": 50,\n    \"phoneNumber\": \"{{enduser-identifier}}\",\n    \"includeContentLock\": true,\n    \"includeParentalControl\": true\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{api-gateway-url}}/kyc-age-verification/v0.1/verify",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"kyc-age-verification",
+												"v0.1",
+												"verify"
+											]
+										},
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/verifyage](https://developers.opengateway.telefonica.com/reference/verifyage)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection kyc-age-verification:verify`"
 									},
 									"response": []
 								}
