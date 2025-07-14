@@ -4,7 +4,7 @@
 		"name": "Open Gateway",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "13571917",
-		"_collection_link": "https://universal-crater-26893.postman.co/workspace/Telef%25C3%25B3nica~74386f95-ae5f-45cd-862a-5d9f88e4a89c/collection/13571917-de7d4b16-3b8e-4a47-9845-a1ba6c1828bd?action=share&source=collection_link&creator=13571917"
+		"_collection_link": "https://universal-crater-26893.postman.co/workspace/Telef%C3%B3nica~74386f95-ae5f-45cd-862a-5d9f88e4a89c/collection/13571917-de7d4b16-3b8e-4a47-9845-a1ba6c1828bd?action=share&source=collection_link&creator=13571917"
 	},
 	"item": [
 		{
@@ -797,6 +797,94 @@
 					]
 				},
 				{
+					"name": "Device Swap",
+					"item": [
+						{
+							"name": "v0.1",
+							"item": [
+								{
+									"name": "Device Swap check",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"phoneNumber\": \"{{enduser-identifier}}\",\n    \"maxAge\": 2400\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{api-gateway-url}}/device-swap/v0.1/check",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"device-swap",
+												"v0.1",
+												"check"
+											]
+										},
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/checkdeviceswap-3](https://developers.opengateway.telefonica.com/reference/checkdeviceswap-3)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-swap`"
+									},
+									"response": []
+								},
+								{
+									"name": "Device Swap retrieve date",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{access_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"phoneNumber\": \"{{enduser-identifier}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{api-gateway-url}}/device-swap/v0.1/retrieve-date",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"device-swap",
+												"v0.1",
+												"retrieve-date"
+											]
+										},
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/retrievedeviceswapdate-3](https://developers.opengateway.telefonica.com/reference/retrievedeviceswapdate-3)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-swap`"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
 					"name": "Mobile QoD",
 					"item": [
 						{
@@ -1473,13 +1561,13 @@
 					]
 				},
 				{
-					"name": "Device Swap",
+					"name": "Tenure",
 					"item": [
 						{
 							"name": "v0.1",
 							"item": [
 								{
-									"name": "Device Swap check",
+									"name": "KYC Tenure",
 									"request": {
 										"auth": {
 											"type": "bearer",
@@ -1495,7 +1583,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"phoneNumber\": \"{{enduser-identifier}}\",\n    \"maxAge\": 2400\n}",
+											"raw": "{\n    \"tenureDate\": \"2023-07-03\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -1503,56 +1591,17 @@
 											}
 										},
 										"url": {
-											"raw": "{{api-gateway-url}}/device-swap/v0.1/check",
+											"raw": "{{api-gateway-url}}/kyc-tenure/v0.1/check-tenure",
 											"host": [
 												"{{api-gateway-url}}"
 											],
 											"path": [
-												"device-swap",
+												"kyc-tenure",
 												"v0.1",
-												"check"
+												"check-tenure"
 											]
 										},
-										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/checkdeviceswap-3](https://developers.opengateway.telefonica.com/reference/checkdeviceswap-3)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-swap`"
-									},
-									"response": []
-								},
-								{
-									"name": "Device Swap retrieve date",
-									"request": {
-										"auth": {
-											"type": "bearer",
-											"bearer": [
-												{
-													"key": "token",
-													"value": "{{access_token}}",
-													"type": "string"
-												}
-											]
-										},
-										"method": "POST",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n    \"phoneNumber\": \"{{enduser-identifier}}\"\n}",
-											"options": {
-												"raw": {
-													"language": "json"
-												}
-											}
-										},
-										"url": {
-											"raw": "{{api-gateway-url}}/device-swap/v0.1/retrieve-date",
-											"host": [
-												"{{api-gateway-url}}"
-											],
-											"path": [
-												"device-swap",
-												"v0.1",
-												"retrieve-date"
-											]
-										},
-										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/retrievedeviceswapdate-3](https://developers.opengateway.telefonica.com/reference/retrievedeviceswapdate-3)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#device-swap`"
+										"description": "Check the API reference at [https://developers.opengateway.telefonica.com/reference/checktenure](https://developers.opengateway.telefonica.com/reference/checktenure)\n\nUse any of the flows in the Authorization folder to get an access_token, with the following purpose:\n\n`dpv:FraudPreventionAndDetection#kyc-tenure`"
 									},
 									"response": []
 								}
