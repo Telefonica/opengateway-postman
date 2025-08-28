@@ -11,7 +11,7 @@
 			"name": "Authorization (OIDC)",
 			"item": [
 				{
-					"name": "CIBA (Backend)",
+					"name": "CIBA with client secret (Backend)",
 					"item": [
 						{
 							"name": "1st Authorization request",
@@ -214,6 +214,209 @@
 					"description": "[https://developers.opengateway.telefonica.com/docs/backend](https://developers.opengateway.telefonica.com/docs/backend)"
 				},
 				{
+					"name": "CIBA with private JWT key (Backend)",
+					"item": [
+						{
+							"name": "1st Authorization request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(pm.response.text());",
+											"pm.environment.set(\"auth_req_id\", jsonData.auth_req_id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "login_hint",
+											"value": "{{identifier-type}}:{{enduser-identifier}}",
+											"description": "Format = identifier_type:identifier (refers to end user)",
+											"type": "text"
+										},
+										{
+											"key": "scope",
+											"value": "{{api-product-purpose}}",
+											"description": "Format = dpv:w3c-purpose#api-scope",
+											"type": "text"
+										},
+										{
+											"key": "client_assertion_type",
+											"value": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
+											"description": "Fixed value for this authentication method",
+											"type": "text"
+										},
+										{
+											"key": "client_assertion",
+											"value": "",
+											"description": "Your signed JWT",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{auth-gateway-url}}/bc-authorize",
+									"host": [
+										"{{auth-gateway-url}}"
+									],
+									"path": [
+										"bc-authorize"
+									]
+								},
+								"description": "This is the 1st request of the CIBA flow.\n\nCheck our guide here [https://developers.opengateway.telefonica.com/docs/backend](https://developers.opengateway.telefonica.com/docs/backend)\n\nCheck the proper purpose to use for each API in the request documentation at the Service APIs folder.\n\nE.g. for SIM Swap `dpv:FraudPreventionAndDetection#sim-swap`"
+							},
+							"response": [
+								{
+									"name": "Response example",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "login_hint",
+													"value": "phone_number:{{enduser-identifier}}",
+													"description": "Format = identifier_type:identifier (refers to end user)",
+													"type": "text"
+												},
+												{
+													"key": "purpose",
+													"value": "{{api-product-purpose}}",
+													"description": "Format = dpv:w3c-purpose#api-scope",
+													"type": "text"
+												},
+												{
+													"key": "acr_values",
+													"value": "2",
+													"type": "text",
+													"disabled": true
+												}
+											]
+										},
+										"url": {
+											"raw": "{{api-gateway-url}}/bc-authorize",
+											"host": [
+												"{{api-gateway-url}}"
+											],
+											"path": [
+												"bc-authorize"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Tue, 21 May 2024 08:25:40 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "89"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "X-Correlator",
+											"value": "70bfd722-cf71-4668-8fa7-cfc316946a38"
+										},
+										{
+											"key": "Strict-Transport-Security",
+											"value": "max-age=15724800; includeSubDomains"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"auth_req_id\": \"xDjNuuTLTNeU-zbhQJ_qgw\",\n    \"expires_in\": 300,\n    \"interval\": 2\n}"
+								}
+							]
+						},
+						{
+							"name": "2nd Get access token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(pm.response.text());",
+											"pm.environment.set(\"access_token\", jsonData.access_token);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "urn:openid:params:grant-type:ciba",
+											"description": "Fixed value for this authentication method",
+											"type": "text"
+										},
+										{
+											"key": "auth_req_id",
+											"value": "{{auth_req_id}}",
+											"description": "As obtained from /bc-authorize",
+											"type": "text"
+										},
+										{
+											"key": "client_assertion_type",
+											"value": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
+											"description": "Fixed value for this authentication method",
+											"type": "text"
+										},
+										{
+											"key": "client_assertion",
+											"value": "",
+											"description": "Your signed JWT",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{auth-gateway-url}}/token",
+									"host": [
+										"{{auth-gateway-url}}"
+									],
+									"path": [
+										"token"
+									]
+								},
+								"description": "This is the 2nd request of the CIBA flow.\n\nCheck our guide here [https://developers.opengateway.telefonica.com/docs/backend](https://developers.opengateway.telefonica.com/docs/backend)\n\nIn case the purpose used in the 1st step needed end-user consent, it should be captured in an out-of-band flow."
+							},
+							"response": []
+						}
+					],
+					"description": "[https://developers.opengateway.telefonica.com/docs/backend](https://developers.opengateway.telefonica.com/docs/backend)"
+				},
+				{
 					"name": "Auth code (Frontend)",
 					"item": [
 						{
@@ -245,6 +448,19 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"pm.test(\"Status code is 302\", function () {",
+											"    pm.expect(pm.response.code).to.equal(302)",
+											"})",
+											"",
+											"if (pm.response.code === 302) {",
+											"    const locationHeader = pm.response.headers.get(\"location\")",
+											"    const url = new URL(locationHeader)",
+											"    const codeValue = url.searchParams.get(\"code\")",
+											"",
+											"    if (codeValue) {",
+											"        pm.environment.set(\"authorization_code\", codeValue)",
+											"    }",
+											"}",
 											""
 										],
 										"type": "text/javascript",
@@ -262,7 +478,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{auth-gateway-url}}/authorize?client_id={{application-client-id}}&response_type=code&scope={{api-product-purpose}}&redirect_uri={{application-backend-callback-url}}&state={{enduser-identifier}}&login_hint={{identifier-type}}:{{enduser-identifier}}",
+									"raw": "{{auth-gateway-url}}/authorize?client_id={{application-client-id}}&response_type=code&scope={{api-product-purpose}}&redirect_uri={{application-backend-callback-url}}",
 									"host": [
 										"{{auth-gateway-url}}"
 									],
@@ -289,22 +505,6 @@
 											"key": "redirect_uri",
 											"value": "{{application-backend-callback-url}}",
 											"description": "You will take de authorization code at this endpoint from the code parameter in the query string"
-										},
-										{
-											"key": "state",
-											"value": "{{enduser-identifier}}",
-											"description": "Anything you need to share between your app components related to your session or transaction. You will want to pass the end-user's phone number if you need it at backend to perform a request to the service API"
-										},
-										{
-											"key": "login_hint",
-											"value": "{{identifier-type}}:{{enduser-identifier}}",
-											"description": "If using the Telefonica Sandbox, use this param to identify your whitelisted phone number"
-										},
-										{
-											"key": "nonce",
-											"value": "request_nonce",
-											"description": "In order to identify each request",
-											"disabled": true
 										}
 									]
 								},
@@ -313,73 +513,152 @@
 							"response": []
 						},
 						{
-							"name": "2nd Get access token",
-							"event": [
+							"name": "2nd Get access token with client secret (Frontend)",
+							"item": [
 								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"var jsonData = JSON.parse(pm.response.text());",
-											"pm.environment.set(\"access_token\", jsonData.access_token);"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
+									"name": "2nd Get access token",
+									"event": [
 										{
-											"key": "password",
-											"value": "{{application-client-secret}}",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "{{application-client-id}}",
-											"type": "string"
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = JSON.parse(pm.response.text());",
+													"pm.environment.set(\"access_token\", jsonData.access_token);"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
 										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "urlencoded",
-									"urlencoded": [
-										{
-											"key": "grant_type",
-											"value": "authorization_code",
-											"description": "Fixed value for this authentication method",
-											"type": "text"
-										},
-										{
-											"key": "code",
-											"value": "",
-											"description": "The one obtained at the redirect_uri provided to /auithorize",
-											"type": "text"
-										},
-										{
-											"key": "redirect_uri",
-											"value": "{{application-backend-callback-url}}",
-											"description": "You will take de authorization code at this endpoint from the code parameter in the query string",
-											"type": "text"
-										}
-									]
-								},
-								"url": {
-									"raw": "{{auth-gateway-url}}/token",
-									"host": [
-										"{{auth-gateway-url}}"
 									],
-									"path": [
-										"token"
-									]
-								},
-								"description": "This is the 2nd request of the Auth Code flow.\n\nCheck our guide here [https://developers.opengateway.telefonica.com/docs/frontend](https://developers.opengateway.telefonica.com/docs/frontend)\n\nThis request is supposed to be performed from your backend, from where you publish your `redirect_uri` listening for the code requested in the 1st step.\n\nIn case the purpose used in the 1st step needed end-user consent, it will redirect such first request to the proper consent capture web page previous to the redirect to your redirect_uri."
-							},
-							"response": []
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "{{application-client-secret}}",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "{{application-client-id}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "grant_type",
+													"value": "authorization_code",
+													"description": "Fixed value for this authentication method",
+													"type": "text"
+												},
+												{
+													"key": "code",
+													"value": "{{authorization_code}}",
+													"description": "The one obtained at the redirect_uri provided to /auithorize",
+													"type": "text"
+												},
+												{
+													"key": "redirect_uri",
+													"value": "{{application-backend-callback-url}}",
+													"description": "You will take de authorization code at this endpoint from the code parameter in the query string",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{auth-gateway-url}}/token",
+											"host": [
+												"{{auth-gateway-url}}"
+											],
+											"path": [
+												"token"
+											]
+										},
+										"description": "This is the 2nd request of the Auth Code flow.\n\nCheck our guide here [https://developers.opengateway.telefonica.com/docs/frontend](https://developers.opengateway.telefonica.com/docs/frontend)\n\nThis request is supposed to be performed from your backend, from where you publish your `redirect_uri` listening for the code requested in the 1st step.\n\nIn case the purpose used in the 1st step needed end-user consent, it will redirect such first request to the proper consent capture web page previous to the redirect to your redirect_uri."
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "2nd Get access token with private JWT key (Frontend)",
+							"item": [
+								{
+									"name": "2nd Get access token",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = JSON.parse(pm.response.text());",
+													"pm.environment.set(\"access_token\", jsonData.access_token);"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "grant_type",
+													"value": "authorization_code",
+													"description": "Fixed value for this authentication method",
+													"type": "text"
+												},
+												{
+													"key": "code",
+													"value": "{{authorization_code}}",
+													"description": "The one obtained at the redirect_uri provided to /auithorize",
+													"type": "text"
+												},
+												{
+													"key": "redirect_uri",
+													"value": "{{application-backend-callback-url}}",
+													"description": "You will take de authorization code at this endpoint from the code parameter in the query string",
+													"type": "text"
+												},
+												{
+													"key": "client_assertion_type",
+													"value": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
+													"description": "Fixed value for this authentication method",
+													"type": "text"
+												},
+												{
+													"key": "client_assertion",
+													"value": "",
+													"description": "Your signed JWT",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{auth-gateway-url}}/token",
+											"host": [
+												"{{auth-gateway-url}}"
+											],
+											"path": [
+												"token"
+											]
+										},
+										"description": "This is the 2nd request of the Auth Code flow.\n\nCheck our guide here [https://developers.opengateway.telefonica.com/docs/frontend](https://developers.opengateway.telefonica.com/docs/frontend)\n\nThis request is supposed to be performed from your backend, from where you publish your `redirect_uri` listening for the code requested in the 1st step.\n\nIn case the purpose used in the 1st step needed end-user consent, it will redirect such first request to the proper consent capture web page previous to the redirect to your redirect_uri."
+									},
+									"response": []
+								}
+							]
 						}
 					],
 					"description": "[https://developers.opengateway.telefonica.com/docs/frontend](https://developers.opengateway.telefonica.com/docs/frontend)"
