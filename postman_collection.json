@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "de7d4b16-3b8e-4a47-9845-a1ba6c1828bd",
+		"_postman_id": "c0033b8c-0090-43c7-a8ac-cd399efa2029",
 		"name": "Open Gateway",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "13571917",
-		"_collection_link": "https://universal-crater-26893.postman.co/workspace/Telef%C3%B3nica~74386f95-ae5f-45cd-862a-5d9f88e4a89c/collection/13571917-de7d4b16-3b8e-4a47-9845-a1ba6c1828bd?action=share&source=collection_link&creator=13571917"
+		"_collection_link": "https://universal-crater-26893.postman.co/workspace/Telef%C3%B3nica~74386f95-ae5f-45cd-862a-5d9f88e4a89c/collection/13571917-c0033b8c-0090-43c7-a8ac-cd399efa2029?action=share&source=collection_link&creator=13571917"
 	},
 	"item": [
 		{
@@ -420,99 +420,6 @@
 					"name": "Auth code (Frontend)",
 					"item": [
 						{
-							"name": "1st Authorization request",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"if (pm.environment.get('api-product-purpose').indexOf('#') > 0) {",
-											"    pm.environment.set(",
-											"        'api-product-purpose',",
-											"        encodeURIComponent(pm.environment.get('api-product-purpose'))",
-											"    )",
-											"}",
-											"var { key, value } = pm.request.url.query.find(param => param.key === 'state')",
-											"if (value && value.indexOf('{{') === 0) {",
-											"    const variable = value.replace('{{', '').replace('}}', '')",
-											"    value = pm.variables.get(variable)",
-											"}",
-											"pm.request.removeQueryParams(key)",
-											"pm.request.addQueryParams(`${key}=${encodeURIComponent(value)}`)"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Status code is 302\", function () {",
-											"    pm.expect(pm.response.code).to.equal(302)",
-											"})",
-											"",
-											"if (pm.response.code === 302) {",
-											"    const locationHeader = pm.response.headers.get(\"location\")",
-											"    const url = new URL(locationHeader)",
-											"    const codeValue = url.searchParams.get(\"code\")",
-											"",
-											"    if (codeValue) {",
-											"        pm.environment.set(\"authorization_code\", codeValue)",
-											"    }",
-											"}",
-											""
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"followRedirects": false
-							},
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{auth-gateway-url}}/authorize?client_id={{application-client-id}}&response_type=code&scope={{api-product-purpose}}&redirect_uri={{application-backend-callback-url}}",
-									"host": [
-										"{{auth-gateway-url}}"
-									],
-									"path": [
-										"authorize"
-									],
-									"query": [
-										{
-											"key": "client_id",
-											"value": "{{application-client-id}}",
-											"description": "Your app's"
-										},
-										{
-											"key": "response_type",
-											"value": "code",
-											"description": "Fixed value for this authentication method"
-										},
-										{
-											"key": "scope",
-											"value": "{{api-product-purpose}}",
-											"description": "According to the product's purpose and scope. Check Service API request's documentation"
-										},
-										{
-											"key": "redirect_uri",
-											"value": "{{application-backend-callback-url}}",
-											"description": "You will take de authorization code at this endpoint from the code parameter in the query string"
-										}
-									]
-								},
-								"description": "This is the 1st request of the Auth Code flow.\n\nCheck our guide here [https://developers.opengateway.telefonica.com/docs/frontend](https://developers.opengateway.telefonica.com/docs/frontend)\n\nCheck the proper purpose to use for each API in the request documentation at the Service APIs folder.\n\nE.g. for SIM Swap `dpv:FraudPreventionAndDetection#sim-swap`\n\nThis request must be performed from the end-user's device since this authentication method consists of its IP address resolution to identify them. It has been included in this collection as a reference. Sending it from Postman just won't work, since the client must follow redirections until reaching the `redirect_uri`. In order to test it, copy the URL resolved with your values (you can find it in this very Documentation tab) and paste it in your browser running on the end-user's device.\n\nYou will need to publish an HTTP server to listen for the `redirect_uri` where the code will be redirected to."
-							},
-							"response": []
-						},
-						{
 							"name": "2nd Get access token with client secret (Frontend)",
 							"item": [
 								{
@@ -659,6 +566,91 @@
 									"response": []
 								}
 							]
+						},
+						{
+							"name": "1st Authorization request",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const scope = pm.environment.get(\"api-product-purpose\");",
+											"const encodedScope = encodeURIComponent(scope);",
+											"pm.environment.set(\"api-product-purpose\", encodedScope);"
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 302\", function () {",
+											"    pm.expect(pm.response.code).to.equal(302)",
+											"})",
+											"",
+											"if (pm.response.code === 302) {",
+											"    const locationHeader = pm.response.headers.get(\"location\")",
+											"    const url = new URL(locationHeader)",
+											"    const codeValue = url.searchParams.get(\"code\")",
+											"",
+											"    if (codeValue) {",
+											"        pm.environment.set(\"authorization_code\", codeValue)",
+											"    }",
+											"}",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {},
+										"requests": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"followRedirects": false
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{auth-gateway-url}}/authorize?redirect_uri={{application-backend-callback-url}}&client_id={{application-client-id}}&response_type=code&scope={{api-product-purpose}}",
+									"host": [
+										"{{auth-gateway-url}}"
+									],
+									"path": [
+										"authorize"
+									],
+									"query": [
+										{
+											"key": "redirect_uri",
+											"value": "{{application-backend-callback-url}}",
+											"description": "You will take de authorization code at this endpoint from the code parameter in the query string"
+										},
+										{
+											"key": "client_id",
+											"value": "{{application-client-id}}",
+											"description": "Your app's"
+										},
+										{
+											"key": "response_type",
+											"value": "code",
+											"description": "Fixed value for this authentication method"
+										},
+										{
+											"key": "scope",
+											"value": "{{api-product-purpose}}",
+											"description": "According to the product's purpose and scope. Check Service API request's documentation"
+										}
+									]
+								},
+								"description": "This is the 1st request of the Auth Code flow.\n\nCheck our guide here [https://developers.opengateway.telefonica.com/docs/frontend](https://developers.opengateway.telefonica.com/docs/frontend)\n\nCheck the proper purpose to use for each API in the request documentation at the Service APIs folder.\n\nE.g. for SIM Swap `dpv:FraudPreventionAndDetection#sim-swap`\n\nThis request must be performed from the end-user's device since this authentication method consists of its IP address resolution to identify them. It has been included in this collection as a reference. Sending it from Postman just won't work, since the client must follow redirections until reaching the `redirect_uri`. In order to test it, copy the URL resolved with your values (you can find it in this very Documentation tab) and paste it in your browser running on the end-user's device.\n\nYou will need to publish an HTTP server to listen for the `redirect_uri` where the code will be redirected to."
+							},
+							"response": []
 						}
 					],
 					"description": "[https://developers.opengateway.telefonica.com/docs/frontend](https://developers.opengateway.telefonica.com/docs/frontend)"
