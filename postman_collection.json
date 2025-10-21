@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "c0033b8c-0090-43c7-a8ac-cd399efa2029",
+		"_postman_id": "2d7bb75c-c386-412a-9163-f24ff764c9e8",
 		"name": "Open Gateway",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "13571917",
-		"_collection_link": "https://universal-crater-26893.postman.co/workspace/Telef%C3%B3nica~74386f95-ae5f-45cd-862a-5d9f88e4a89c/collection/13571917-c0033b8c-0090-43c7-a8ac-cd399efa2029?action=share&source=collection_link&creator=13571917"
+		"_collection_link": "https://universal-crater-26893.postman.co/workspace/Telef%C3%B3nica~74386f95-ae5f-45cd-862a-5d9f88e4a89c/collection/13571917-2d7bb75c-c386-412a-9163-f24ff764c9e8?action=share&source=collection_link&creator=13571917"
 	},
 	"item": [
 		{
@@ -618,7 +618,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{auth-gateway-url}}/authorize?redirect_uri={{application-backend-callback-url}}&client_id={{application-client-id}}&response_type=code&scope={{api-product-purpose}}",
+									"raw": "{{auth-gateway-url}}/authorize?response_type=code&client_id={{application-client-id}}&scope={{api-product-purpose}}&redirect_uri={{application-backend-callback-url}}",
 									"host": [
 										"{{auth-gateway-url}}"
 									],
@@ -627,9 +627,9 @@
 									],
 									"query": [
 										{
-											"key": "redirect_uri",
-											"value": "{{application-backend-callback-url}}",
-											"description": "You will take de authorization code at this endpoint from the code parameter in the query string"
+											"key": "response_type",
+											"value": "code",
+											"description": "Fixed value for this authentication method"
 										},
 										{
 											"key": "client_id",
@@ -637,14 +637,20 @@
 											"description": "Your app's"
 										},
 										{
-											"key": "response_type",
-											"value": "code",
-											"description": "Fixed value for this authentication method"
-										},
-										{
 											"key": "scope",
 											"value": "{{api-product-purpose}}",
 											"description": "According to the product's purpose and scope. Check Service API request's documentation"
+										},
+										{
+											"key": "redirect_uri",
+											"value": "{{application-backend-callback-url}}",
+											"description": "You will take de authorization code at this endpoint from the code parameter in the query string"
+										},
+										{
+											"key": "state",
+											"value": "",
+											"description": "Anything that needs to be shared between your front and back ends will be included in the redirect to your redirect_uri",
+											"disabled": true
 										}
 									]
 								},
